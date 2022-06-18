@@ -7,8 +7,7 @@ const Container = styled.div`
   height: 10vh;
 `
 const Wrapper = styled.div`
-  width: 95%;
-  padding-top: 1rem;
+  width: 97%;
   display: flex;
   align-items: center;
 `
@@ -23,6 +22,7 @@ const Center = styled.div`
   flex: 2;
   padding-top: 1rem;
   text-align: center;
+  cursor: pointer;
 `
 const Right = styled.div`
   flex: 1;
@@ -38,6 +38,7 @@ const Label = styled.label`
   font-weight: 600px;
   padding-right: 2rem;
   text-align: center;
+  cursor: pointer;
 `
 const MenuItem = styled.div`
   position: relative;

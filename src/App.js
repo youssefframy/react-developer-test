@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Header from './components/header.component';
-import PLP from './pages/product-listing-page';
-import PDP from './pages/product-display-page';
-import CartPage from './pages/cart-page';
+import Header from './components/Header';
+import PLP from './pages/PLP';
+import PDP from './pages/PDP';
+import CartPage from './pages/CartPage';
 
 
 import './App.css';

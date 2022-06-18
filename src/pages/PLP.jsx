@@ -5,7 +5,7 @@ class PLP extends Component {
   render() {
     return (
       <div>
-        
+        <h1>Category Name</h1>
       </div>
     )
   }
