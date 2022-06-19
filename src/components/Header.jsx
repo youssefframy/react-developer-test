@@ -4,7 +4,7 @@ import Logo from "../assets/logo.svg";
 import CartLogo from "../assets/cart.svg";
 
 const Container = styled.div`
-  height: 10vh;
+  height: 15vh;
 `
 const Wrapper = styled.div`
   width: 97%;

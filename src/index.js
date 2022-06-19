@@ -1,18 +1,42 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
+import { ApolloProvider } from 'react-apollo';
+import { createHttpLink } from 'apollo-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { ApolloClient, gql} from 'apollo-boost';
+
 import './index.css';
 import App from './App';
+import {resolvers, typeDefs} from './graphQL/resolver';
 import reportWebVitals from './reportWebVitals';
+
+const httpLink = createHttpLink({ 
+  uri: 'http://localhost:4000'
+});
+
+const cache = new InMemoryCache();
+
+const client = new ApolloClient({ 
+  link: httpLink,
+  cache: cache,
+  typeDefs,
+  resolvers
+});
+
+client.writeData({ 
+  data: { 
+    cartHidden: true
+  }
+})
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+  <ApolloProvider client={client}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </ApolloProvider>, 
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
