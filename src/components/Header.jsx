@@ -4,23 +4,24 @@ import Logo from "../assets/logo.svg";
 import CartLogo from "../assets/cart.svg";
 
 const Container = styled.div`
-  height: 15vh;
+  height: 20vh;
 `
 const Wrapper = styled.div`
   width: 97%;
+  padding-top: 5vh;
   display: flex;
   align-items: center;
 `
 /* Nav Bar Partition */
 const Left = styled.div`   
-  flex: 1;
-  text-align: center;
+  flex: 2;
+  text-align: flex-start;
+  padding-left: 3vw;
   align-items: center;
-  padding-left: 3rem;
 `
 const Center = styled.div`
   flex: 2;
-  padding-top: 1rem;
+  margin-right: 10rem;
   text-align: center;
   cursor: pointer;
 `
@@ -33,12 +34,16 @@ const Right = styled.div`
 `
 
 const Label = styled.label`
-  padding: 5px;
-  color: #5ECE7B;
-  font-weight: 600px;
-  padding-right: 2rem;
+  padding: 1rem;
+  color: ${({isActive}) => 
+    isActive ? '#5ECE7B' : '#1D1F22'
+  };
+  font-weight: bold;
   text-align: center;
   cursor: pointer;
+  border-bottom: ${({isActive}) => 
+    isActive ? '1px solid #5ECE7B' : 'none'
+    };
 `
 const MenuItem = styled.div`
   position: relative;
@@ -68,18 +73,26 @@ const CartBadge = styled.div`
 `
 
 class Header extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      active: true,
+    }
+  }
+
   render() {
     return (
       <Container>
         <Wrapper>
           <Left>
-              <Label>ALL</Label>
+              <Label isActive={this.state.active}>ALL</Label>
               <Label>TECH</Label>
               <Label>CLOTHES</Label>
           </Left>
         
         <Center>
-          <img src={Logo} alt="logo"/>
+            <img src={Logo} alt="logo"/>
         </Center>
 
           <Right >
