@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import Logo from "../assets/logo.svg";
 import CartLogo from "../assets/cart.svg";
+// import CartDropdown from './Cart-dropdown';
 
 import {graphql} from 'react-apollo';
 import {CURRENCY_DATA} from '../graphQL/Queries';
@@ -15,7 +16,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
 `
-/* Nav Bar Partition */
+
 const Left = styled.div`   
   flex: 2;
   text-align: flex-start;
@@ -79,13 +80,14 @@ const Switcher = styled.div`
         border: none;
         padding: 2px;
         cursor: pointer;
-        font-size: 1.1rem;
+        font-size: 1rem;
         text-align: center;
         justify-content: center;
 
         &:focus{
             outline: none;
         }
+
     }
 `
 
@@ -98,10 +100,10 @@ class Header extends Component {
       active: true,
     }
   }
-
+  
   render() {
     const data = this.props.data;
-
+    console.log('symbol: ', this.state.currency)
     return (
       <Container>
         <Wrapper>
@@ -118,13 +120,17 @@ class Header extends Component {
           <Right >
               <MenuItem>
               <Switcher>
-                <select onChange={(e) =>{
-                    const selectedCurrency = e.target.value;
-                    this.setState({currency: selectedCurrency})
-                }}>
-                {data.loading ? <option value="$">$</option>: data.currencies.map(currency => { 
+                <select
+                  onChange={(e) =>{
+                      const selectedCurrency = e.target.value;
+                      this.setState({currency: selectedCurrency})
+                  }}
+                >
+                {data.loading ? 
+                    <option value="$">$</option> :                  
+                    data.currencies.map(currency => { 
                     return (
-                        <option key={currency.symbol} value={currency.symbol}>{currency.symbol}</option>
+                        <option key={currency.symbol} value={currency.symbol} label={`${currency.symbol} ${currency.label}`}/>
                     )
                 })}
                 </select>

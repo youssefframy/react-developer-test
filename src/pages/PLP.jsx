@@ -6,7 +6,7 @@ import Categories from '../components/Categories';
 
 const Container = styled.div`
   scrollbar-width: none;
-  padding-left: 3vw;
+  margin-inline: 3vw;
 `
 
 class PLP extends Component {

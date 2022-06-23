@@ -22,6 +22,7 @@ export const PLP_DATA = gql`
 export const CURRENCY_DATA = gql `
     {
         currencies{
+            label
             symbol
         }
     }
