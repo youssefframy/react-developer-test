@@ -3,6 +3,7 @@ import {gql} from 'apollo-boost';
 export const PLP_DATA = gql`
     {
         category{
+            name
             products{
                 id
                 name
@@ -14,6 +15,14 @@ export const PLP_DATA = gql`
                 }
                 category
             }
+        }
+    }
+`
+
+export const CURRENCY_DATA = gql `
+    {
+        currencies{
+            symbol
         }
     }
 `

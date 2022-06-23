@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import Logo from "../assets/logo.svg";
 import CartLogo from "../assets/cart.svg";
 
+import {graphql} from 'react-apollo';
+import {CURRENCY_DATA} from '../graphQL/Queries';
+
 const Container = styled.div`
   height: 20vh;
 `
@@ -71,17 +74,34 @@ const CartBadge = styled.div`
   justify-content: center;
   align-items: center;
 `
+const Switcher = styled.div`
+    select{
+        border: none;
+        padding: 2px;
+        cursor: pointer;
+        font-size: 1.1rem;
+        text-align: center;
+        justify-content: center;
+
+        &:focus{
+            outline: none;
+        }
+    }
+`
 
 class Header extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      currency: '$',
       active: true,
     }
   }
 
   render() {
+    const data = this.props.data;
+
     return (
       <Container>
         <Wrapper>
@@ -96,7 +116,20 @@ class Header extends Component {
         </Center>
 
           <Right >
-              <MenuItem>$</MenuItem>
+              <MenuItem>
+              <Switcher>
+                <select onChange={(e) =>{
+                    const selectedCurrency = e.target.value;
+                    this.setState({currency: selectedCurrency})
+                }}>
+                {data.loading ? <option value="$">$</option>: data.currencies.map(currency => { 
+                    return (
+                        <option key={currency.symbol} value={currency.symbol}>{currency.symbol}</option>
+                    )
+                })}
+                </select>
+            </Switcher>
+              </MenuItem>
               <MenuItem>
                 <CartBadge>2</CartBadge>
                 <img src={CartLogo} alt="cart"/>
@@ -108,4 +141,4 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default graphql(CURRENCY_DATA)(Header);
