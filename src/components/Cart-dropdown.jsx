@@ -3,16 +3,16 @@ import styled from 'styled-components';
 
 const DropdownContainer = styled.div`
     position: absolute;
-    width: 325px;
-    height: 670px;
+    width: 338px;
+    height: 550px;
     display: flex;
     flex-direction: column;
     padding: 20px;
-    border: 1px solid black;
     background-color: white;
     top: 90px;
     right: 40px;
     z-index: 5;
+    box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
 `
 
 const CartItems = styled.div`
@@ -26,27 +26,42 @@ const ButtonsContainer = styled.div`
     align-items: center;
     justify-content: space-between;
     margin-top: auto;
+
+    button {
+      cursor: pointer;
+      gap: 10px;
+      width: 140px;
+      height: 43px;
+
+      &:focus{
+        outline: none;
+      }
+
+    }
 `
 
 const ViewBagButton = styled.button`
-    cursor: pointer;
-    gap: 10px;
-    width: 140px;
-    height: 43px;
-    align-items: center;
-`
-
-const CheckoutButton = styled.button`
-    cursor: pointer;
-    gap: 10px;
-    width: 140px;
-    height: 43px;
-    color: #FFFFFF;
-    background: #5ECE7B;
+    color: #4a4848;
+    transition: 1s;
     border: 1px solid black;
 
     &:hover{
-        
+      color: #ffffff;
+      border: 1px solid #5ECE7B;
+      background: linear-gradient(to left, #a1ffce, #faffd1);
+    }
+`
+
+const CheckoutButton = styled.button`
+    color: #FFFFFF;
+    background: #5ECE7B;
+    transition: 1s;
+    border: none;
+
+    &:hover{
+      color: #4a4848;
+      border: 1px solid #5ECE7B;
+      background: linear-gradient(to right, #a1ffce, #faffd1);
     }
 `
 

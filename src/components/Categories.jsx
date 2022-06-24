@@ -5,8 +5,8 @@ import { PLP_DATA , CURRENCY_DATA} from '../graphQL/Queries';
 
 const Container = styled.div`
     display: flex;
-    align-items: center;
     flex-wrap: wrap;
+    align-items: center;
     justify-content: space-between;
 `
 
@@ -24,17 +24,20 @@ const ProductContainer = styled.div`
 
   &:hover{
     transform: scale(1.03);
+    box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
   }
 `
 const ImageContainer = styled.div`
   width: 356px;
   height: 300px;
+  overflow: hidden;
 `
 const Image = styled.img`
   width: 356px;
   height: 300px;
   justify-content: center;
   object-fit: cover;
+
 `
 
 const DescriptionContainer= styled.div`

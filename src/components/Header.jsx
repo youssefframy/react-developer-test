@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import Logo from "../assets/logo.svg";
 import CartLogo from "../assets/cart.svg";
-// import CartDropdown from './Cart-dropdown';
+import CartDropdown from './Cart-dropdown';
 
 import {graphql} from 'react-apollo';
 import {CURRENCY_DATA} from '../graphQL/Queries';
@@ -77,6 +77,7 @@ const CartBadge = styled.div`
 `
 const Switcher = styled.div`
     select{
+        content: "$";
         border: none;
         padding: 2px;
         cursor: pointer;
@@ -86,6 +87,10 @@ const Switcher = styled.div`
 
         &:focus{
             outline: none;
+        }
+
+        option{
+          content: "$";
         }
 
     }
@@ -98,12 +103,14 @@ class Header extends Component {
     this.state = {
       currency: '$',
       active: true,
+      hidden: true
     }
   }
   
   render() {
     const data = this.props.data;
     console.log('symbol: ', this.state.currency)
+    console.log('hidden: ', this.state.hidden)
     return (
       <Container>
         <Wrapper>
@@ -136,10 +143,11 @@ class Header extends Component {
                 </select>
             </Switcher>
               </MenuItem>
-              <MenuItem>
+              <MenuItem onClick={() => {this.setState({hidden: !this.state.hidden})}}>
                 <CartBadge>2</CartBadge>
                 <img src={CartLogo} alt="cart"/>
               </MenuItem>
+              {this.state.hidden ? null : <CartDropdown/>}
           </Right>
         </Wrapper>
       </Container>
