@@ -12,9 +12,9 @@ const ProductContainer = styled.div`
   margin-bottom: 2rem;
   transform: translateZ(0);
   transition: transform 0.25s ease-out;
-
+  opacity: ${props => props.inStock};
+  
   &:hover{
-    transform: scale(1.03);
     box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
   }
 `
@@ -37,10 +37,6 @@ const OutStock = styled.div`
     font-weight: 400;
     font-size: 1.5rem;
   }
-
-  img{
-    opacity: 0.5;
-  }
 `
 
 const Image = styled.img`
@@ -56,6 +52,15 @@ const DescriptionContainer= styled.div`
 
 const Description = styled.p`
   text-align: flex-start;
+  font-weight: 300px;
+  font-size: 18px;
+  color: #1D1F22;
+`
+const Price = styled.p`
+  margin-top: -8px;
+  text-align: flex-start;
+  font-size: 18px;
+  font-weight: 600;
 `
 class CategoryItem extends Component {
   constructor(props) {
@@ -71,16 +76,15 @@ class CategoryItem extends Component {
     const currency = this.props.selectedCurrency;
 
     return (
-      <ProductContainer>
+      <ProductContainer inStock={product.inStock ? null :"0.4"}>
       { product.inStock 
         ? <InStock> <Image src={product.gallery[0]} alt={product.name}/> </InStock>
         : <OutStock> <p>OUT OF STOCK</p><Image src={product.gallery[0]} alt={product.name}/> </OutStock>
       }
-      <DescriptionContainer>
-        <Description>{product.name}</Description>
-        <Description>{`${currency[0].currency.symbol} ${currency[0].amount}`}</Description>
-      </DescriptionContainer>
-        
+          <DescriptionContainer>
+            <Description>{product.name}</Description>
+            <Price>{`${currency[0].currency.symbol} ${currency[0].amount}`}</Price>
+          </DescriptionContainer>
     </ProductContainer>
     )
   }
