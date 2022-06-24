@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const DropdownContainer = styled.div`
     position: absolute;
     width: 338px;
-    height: 550px;
+    height: 500px;
     display: flex;
     flex-direction: column;
     padding: 20px;

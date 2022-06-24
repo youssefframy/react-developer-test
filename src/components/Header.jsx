@@ -109,8 +109,6 @@ class Header extends Component {
   
   render() {
     const data = this.props.data;
-    console.log('symbol: ', this.state.currency)
-    console.log('hidden: ', this.state.hidden)
     return (
       <Container>
         <Wrapper>
