@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import AddCart from "../assets/addCart.svg";
+
 
 const ProductContainer = styled.div`
   cursor: pointer;
@@ -13,9 +15,14 @@ const ProductContainer = styled.div`
   transform: translateZ(0);
   transition: transform 0.25s ease-out;
   opacity: ${props => props.inStock};
-  
+  position: relative;
+
   &:hover{
     box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+
+    .add-cart{
+      display: flex;
+    }
   }
 `
 const InStock = styled.div`
@@ -39,11 +46,27 @@ const OutStock = styled.div`
   }
 `
 
+const CartImage = styled.img`
+  position: absolute;
+  width: 55px;
+  top: 70%;
+  right: 5%;
+  display: none;
+
+  &:hover {
+    filter: brightness(105%);
+    transition: filter 1s;
+  }
+`
+
 const Image = styled.img`
   width: 356px;
   height: 300px;
   justify-content: center;
   object-fit: cover;
+  &:hover{
+    box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+  }
 `
 
 const DescriptionContainer= styled.div`
@@ -78,7 +101,10 @@ class CategoryItem extends Component {
     return (
       <ProductContainer inStock={product.inStock ? null :"0.4"}>
       { product.inStock 
-        ? <InStock> <Image src={product.gallery[0]} alt={product.name}/> </InStock>
+        ? <InStock> 
+          <Image src={product.gallery[0]} alt={product.name}/> 
+          <CartImage src={AddCart} className="add-cart" alt="cart"/>
+          </InStock>
         : <OutStock> <p>OUT OF STOCK</p><Image src={product.gallery[0]} alt={product.name}/> </OutStock>
       }
           <DescriptionContainer>

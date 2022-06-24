@@ -28,8 +28,10 @@ const ButtonsContainer = styled.div`
     margin-top: auto;
 
     button {
+      font-family: Raleway;
       cursor: pointer;
-      gap: 10px;
+      font-weight: 600;
+      font-size: 14px;
       width: 140px;
       height: 43px;
 
@@ -46,7 +48,7 @@ const ViewBagButton = styled.button`
     border: 1px solid black;
 
     &:hover{
-      color: #ffffff;
+      color: #383838;
       border: 1px solid #5ECE7B;
       background: linear-gradient(to left, #a1ffce, #faffd1);
     }
