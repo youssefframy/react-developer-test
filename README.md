@@ -1,2 +1,2 @@
 ## E Commerce Web Application
-<img width="700" alt="PLP" src="https://user-images.githubusercontent.com/80947144/175658938-7d3f0f63-83a6-447c-83e6-0340d7fd5158.png">
+![PLP](https://user-images.githubusercontent.com/80947144/175780536-c429a502-d823-4c1b-8348-12b3712b187f.png)
