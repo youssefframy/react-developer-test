@@ -3,8 +3,30 @@ import styled from 'styled-components';
 import AddCart from "../assets/addCart.svg";
 
 
+const CartImage = styled.img`
+  position: absolute;
+  width: 55px;
+  top: 70%;
+  right: 5%;
+  opacity: 0;
+  &:hover{
+    transform: scale(1.05);
+    transition: transform 0.5s ease;
+
+  }
+`
+
+const Image = styled.img`
+  width: 356px;
+  height: 300px;
+  justify-content: center;
+  object-fit: cover;
+  &:hover{
+    box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+  }
+`
 const ProductContainer = styled.div`
-  cursor: pointer;
+  cursor: ${props => props.cursor};
   width: 386px;
   height: 400px;
   background: #FFFFFF;
@@ -19,9 +41,9 @@ const ProductContainer = styled.div`
 
   &:hover{
     box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
-
-    .add-cart{
-      display: flex;
+    
+    ${CartImage}{
+      opacity: 1;
     }
   }
 `
@@ -33,7 +55,7 @@ const InStock = styled.div`
 const OutStock = styled.div`
   text-align: center;
   justify-content: center;
-
+  cursor: default;
   p{
     position: absolute;
     color: #8D8F9A;
@@ -46,28 +68,6 @@ const OutStock = styled.div`
   }
 `
 
-const CartImage = styled.img`
-  position: absolute;
-  width: 55px;
-  top: 70%;
-  right: 5%;
-  display: none;
-
-  &:hover {
-    filter: brightness(105%);
-    transition: filter 1s;
-  }
-`
-
-const Image = styled.img`
-  width: 356px;
-  height: 300px;
-  justify-content: center;
-  object-fit: cover;
-  &:hover{
-    box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
-  }
-`
 
 const DescriptionContainer= styled.div`
   width: 356px;
@@ -90,7 +90,7 @@ class CategoryItem extends Component {
     super(props);
 
     this.state = {
-
+      
     }
   }
 
@@ -99,11 +99,11 @@ class CategoryItem extends Component {
     const currency = this.props.selectedCurrency;
 
     return (
-      <ProductContainer inStock={product.inStock ? null :"0.4"}>
+      <ProductContainer inStock={product.inStock ? null :"0.4"} cursor={product.inStock ? "pointer" : "default"}>
       { product.inStock 
         ? <InStock> 
           <Image src={product.gallery[0]} alt={product.name}/> 
-          <CartImage src={AddCart} className="add-cart" alt="cart"/>
+          <CartImage src={AddCart} alt="cart" onClick={() => {this.props.cart.push(product)}}/>
           </InStock>
         : <OutStock> <p>OUT OF STOCK</p><Image src={product.gallery[0]} alt={product.name}/> </OutStock>
       }

@@ -37,7 +37,10 @@ const Right = styled.div`
   justify-content: flex-end;
 `
 
-const Label = styled.label`
+const Label = styled.button`
+  border: none;
+  font-family: Raleway;
+  background: transparent;
   padding: 1rem;
   color: ${({isActive}) => 
     isActive ? '#5ECE7B' : '#1D1F22'
@@ -103,7 +106,7 @@ class Header extends Component {
     this.state = {
       currency: '$',
       active: true,
-      hidden: true
+      hidden: true,
     }
   }
   
@@ -113,9 +116,9 @@ class Header extends Component {
       <Container>
         <Wrapper>
           <Left>
-              <Label isActive={this.state.active}>ALL</Label>
-              <Label>TECH</Label>
-              <Label>CLOTHES</Label>
+              <Label isActive={this.state.active} value="ALL" >ALL</Label>
+              <Label value="TECH" >TECH</Label>
+              <Label value="CLOTHES">CLOTHES</Label>
           </Left>
         
         <Center>

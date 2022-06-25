@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import styled  from 'styled-components';
 import Categories from '../components/Categories';
 
-
-
 const Container = styled.div`
-  scrollbar-width: none;
   margin-inline: 3vw;
+`
+const Title = styled.h1`
+  margin-bottom: 15vh;
 `
 
 class PLP extends Component {
@@ -21,6 +21,7 @@ class PLP extends Component {
   render() {
     return (
       <Container>
+        <Title>Category Name</Title>
         <Categories/>
       </Container>
     )

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { graphql } from 'react-apollo';
-import { PLP_DATA , CURRENCY_DATA} from '../graphQL/Queries';
+import { PLP_DATA} from '../graphQL/Queries';
 import CategoryItem from './Category-item';
 
 const Container = styled.div`
@@ -15,7 +15,8 @@ class Categories extends Component {
     super(props)
 
     this.state = {
-      currency: "$"
+      currency: "$",
+      cart: []
     }
   }
 
@@ -31,11 +32,11 @@ class Categories extends Component {
               return price.currency.symbol === "$"
             });
             return(
-              <CategoryItem key={product.id} selectedCurrency={selectedCurrency} product={product}/>
+              <CategoryItem key={product.id} selectedCurrency={selectedCurrency} product={product} cart = {this.state.cart}/>
         )})}
       </Container>
     )
   }
 }
 
-export default graphql(PLP_DATA, CURRENCY_DATA)(Categories);
+export default graphql(PLP_DATA)(Categories);
