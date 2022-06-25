@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { graphql } from 'react-apollo';
-import { PLP_DATA} from '../graphQL/Queries';
+import { PLP_DATA } from '../graphQL/Queries';
 import CategoryItem from './Category-item';
+
+
 
 const Container = styled.div`
     display: flex;
@@ -21,7 +23,7 @@ class Categories extends Component {
   }
 
   render() {
-    const data = this.props.data;
+    const { data } = this.props;
 
     return (
       <Container>
@@ -38,5 +40,6 @@ class Categories extends Component {
     )
   }
 }
+
 
 export default graphql(PLP_DATA)(Categories);

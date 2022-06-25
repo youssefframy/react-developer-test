@@ -21,7 +21,7 @@ class PLP extends Component {
   render() {
     return (
       <Container>
-        <Title>Category Name</Title>
+        <Title>ALL</Title>
         <Categories/>
       </Container>
     )

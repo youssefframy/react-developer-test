@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import AddCart from "../assets/addCart.svg";
 
+import {connect} from 'react-redux';
+import { addProduct } from '../redux/cart/cart-action';
 
-const CartImage = styled.img`
+const AddToCart = styled.img`
   position: absolute;
   width: 55px;
   top: 70%;
@@ -42,7 +44,7 @@ const ProductContainer = styled.div`
   &:hover{
     box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
     
-    ${CartImage}{
+    ${AddToCart}{
       opacity: 1;
     }
   }
@@ -68,7 +70,6 @@ const OutStock = styled.div`
   }
 `
 
-
 const DescriptionContainer= styled.div`
   width: 356px;
 `
@@ -86,34 +87,32 @@ const Price = styled.p`
   font-weight: 600;
 `
 class CategoryItem extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      
-    }
-  }
 
   render() {
-    const product = this.props.product;
-    const currency = this.props.selectedCurrency;
+    const {product, selectedCurrency} = this.props;
+    const { addProduct } = this.props;
 
     return (
       <ProductContainer inStock={product.inStock ? null :"0.4"} cursor={product.inStock ? "pointer" : "default"}>
       { product.inStock 
         ? <InStock> 
           <Image src={product.gallery[0]} alt={product.name}/> 
-          <CartImage src={AddCart} alt="cart" onClick={() => {this.props.cart.push(product)}}/>
+          <AddToCart src={AddCart} alt="cart" onClick={() => addProduct(product) }/>
           </InStock>
+          
         : <OutStock> <p>OUT OF STOCK</p><Image src={product.gallery[0]} alt={product.name}/> </OutStock>
       }
           <DescriptionContainer>
             <Description>{product.name}</Description>
-            <Price>{`${currency[0].currency.symbol} ${currency[0].amount}`}</Price>
+            <Price>{`${selectedCurrency[0].currency.symbol} ${selectedCurrency[0].amount}`}</Price>
           </DescriptionContainer>
     </ProductContainer>
     )
   }
 }
 
-export default CategoryItem;
+const mapDispatchToProps = (dispatch) => ({
+  addProduct: product => dispatch(addProduct(product))
+});
+
+export default connect(null, mapDispatchToProps)(CategoryItem);
