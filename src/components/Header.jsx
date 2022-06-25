@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Logo from "../assets/logo.svg";
-import CartLogo from "../assets/cart.svg";
 import CartDropdown from './Cart-dropdown';
+import CurrencySwitcher from './Currency-switcher';
 
-import {graphql} from 'react-apollo';
-import {CURRENCY_DATA} from '../graphQL/Queries';
+import CartIcon from './Cart-icon';
+
+import { connect } from 'react-redux';
 
 const Container = styled.div`
   height: 20vh;
@@ -63,42 +64,6 @@ const MenuItem = styled.div`
   cursor: pointer;
 `
 
-const CartBadge = styled.div`
-  position: absolute;
-  font-size: 0.7rem;
-  font-weight: normal;
-  top: -9px;
-  right: -7px;
-  color: #FFFFFF;
-  width: 1rem;
-  height: 1rem;
-  background-color: #1D1F22;
-  border-radius: 60%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-const Switcher = styled.div`
-    select{
-        content: "$";
-        border: none;
-        padding: 2px;
-        cursor: pointer;
-        font-size: 1rem;
-        text-align: center;
-        justify-content: center;
-
-        &:focus{
-            outline: none;
-        }
-
-        option{
-          content: "$";
-        }
-
-    }
-`
-
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -106,12 +71,11 @@ class Header extends Component {
     this.state = {
       currency: '$',
       active: true,
-      hidden: true,
     }
   }
   
   render() {
-    const data = this.props.data;
+    const { hidden } = this.props;
     return (
       <Container>
         <Wrapper>
@@ -127,28 +91,12 @@ class Header extends Component {
 
           <Right >
               <MenuItem>
-              <Switcher>
-                <select
-                  onChange={(e) =>{
-                      const selectedCurrency = e.target.value;
-                      this.setState({currency: selectedCurrency})
-                  }}
-                >
-                {data.loading ? 
-                    <option value="$">$</option> :                  
-                    data.currencies.map(currency => { 
-                    return (
-                        <option key={currency.symbol} value={currency.symbol} label={`${currency.symbol} ${currency.label}`}/>
-                    )
-                })}
-                </select>
-            </Switcher>
+                <CurrencySwitcher/>
               </MenuItem>
-              <MenuItem onClick={() => {this.setState({hidden: !this.state.hidden})}}>
-                <CartBadge>2</CartBadge>
-                <img src={CartLogo} alt="cart"/>
+              <MenuItem>
+                <CartIcon/>
               </MenuItem>
-              {this.state.hidden ? null : <CartDropdown/>}
+              {hidden ? null : <CartDropdown/>}
           </Right>
         </Wrapper>
       </Container>
@@ -156,4 +104,8 @@ class Header extends Component {
   }
 }
 
-export default graphql(CURRENCY_DATA)(Header);
+const mapStateToProps = ({cart: {hidden}}) => ({
+  hidden,
+})
+
+export default connect(mapStateToProps)(Header);

@@ -6,9 +6,9 @@ import CategoryItem from './Category-item';
 
 const Container = styled.div`
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
+    flex-wrap: wrap;
 `
 class Categories extends Component {
   constructor(props) {

@@ -72,7 +72,6 @@ class CartDropdown extends Component {
     return (
       <DropdownContainer>
         <CartItems>
-
         </CartItems>
         <ButtonsContainer>
             <ViewBagButton>VIEW BAG</ViewBagButton>
