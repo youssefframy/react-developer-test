@@ -50,8 +50,4 @@ const mapDispatchToProps = (dispatch) => ({
   addDataToProducts: data => dispatch(addDataToProducts(data))
 });
 
-const mapStateToProps = ({ filteredProducts :  products}) => ({
-  products
-});
-
 export default connect(null, mapDispatchToProps)(graphql(PLP_DATA)(Categories));

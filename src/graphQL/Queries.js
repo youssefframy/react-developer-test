@@ -9,6 +9,15 @@ export const PLP_DATA = gql`
                 name
                 gallery
                 inStock
+                category
+                brand
+                attributes{
+                  type
+                  items {
+                    id
+                    value
+                  }
+                }
                 prices{
                     currency{
                         label
@@ -16,7 +25,6 @@ export const PLP_DATA = gql`
                     }
                     amount
                 }
-                category
             }
         }
     }
