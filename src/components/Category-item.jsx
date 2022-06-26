@@ -89,9 +89,8 @@ const Price = styled.p`
 class CategoryItem extends Component {
 
   render() {
-    const {product, selectedCurrency} = this.props;
-    const { addProduct } = this.props;
-
+    const {product, selectedCurrency, addProduct} = this.props;
+    
     return (
       <ProductContainer inStock={product.inStock ? null :"0.5"} cursor={product.inStock ? "pointer" : "default"}>
       { product.inStock 

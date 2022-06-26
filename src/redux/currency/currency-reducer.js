@@ -2,7 +2,9 @@ import CurrencyActionTypes from "./currency-types";
 import { filterProducts } from "./currency-utils";
 
 const INITIAL_STATE = {
-    currency: "$"
+    currency: "$",
+    products: [],
+    filteredProducts: [],
 }
 
 const currencyReducer = (state = INITIAL_STATE, action) => { 
@@ -12,9 +14,20 @@ const currencyReducer = (state = INITIAL_STATE, action) => {
             ...state,
             currency: action.payload
           }
+
+        case CurrencyActionTypes.ADD_DATA_TO_PRODUCTS:
+            return {
+                ...state,
+                products: action.payload
+            }
           
-          default:
-            return state;
+        case CurrencyActionTypes.FILTER_PRODUCTS:
+        return {
+            ...state,
+            filteredProducts: filterProducts(action.payload, state.currency)
+        }
+        default:
+        return state;
     }
 }
 

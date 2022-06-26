@@ -10,7 +10,10 @@ export const PLP_DATA = gql`
                 gallery
                 inStock
                 prices{
-                    currency{symbol}
+                    currency{
+                        label
+                        symbol
+                    }
                     amount
                 }
                 category

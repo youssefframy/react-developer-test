@@ -73,8 +73,7 @@ const CheckoutButton = styled.button`
 
 class CartDropdown extends Component {
   render() {
-    const {cartItems} = this.props.cartItems;
-    console.log(cartItems)
+    const { cartItems } = this.props.cartItems;
 
     return (
       <DropdownContainer>

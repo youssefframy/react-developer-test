@@ -4,6 +4,8 @@ import { graphql } from 'react-apollo';
 import { PLP_DATA } from '../graphQL/Queries';
 import CategoryItem from './Category-item';
 
+import { connect } from 'react-redux';
+import { addDataToProducts } from '../redux/currency/currency-action';
 
 
 const Container = styled.div`
@@ -23,23 +25,33 @@ class Categories extends Component {
   }
 
   render() {
-    const { data } = this.props;
+    const { data, addDataToProducts } = this.props;
+    data.loading ? <h1>Loading...</h1> 
+    : addDataToProducts(data)
+
 
     return (
       <Container>
         {data.loading 
           ? <h1>Loading...</h1> 
           : data.category.products.map(product => { 
-            const selectedCurrency = product.prices.filter((price) => { 
+            product.prices = product.prices.filter((price) => { 
               return price.currency.symbol === "$"
             });
             return(
-              <CategoryItem key={product.id} selectedCurrency={selectedCurrency} product={product} cart = {this.state.cart}/>
+              <CategoryItem key={product.id} selectedCurrency={product.prices} product={product} cart = {this.state.cart}/>
         )})}
       </Container>
     )
   }
 }
 
+const mapDispatchToProps = (dispatch) => ({
+  addDataToProducts: data => dispatch(addDataToProducts(data))
+});
 
-export default graphql(PLP_DATA)(Categories);
+const mapStateToProps = ({ filteredProducts :  products}) => ({
+  products
+});
+
+export default connect(null, mapDispatchToProps)(graphql(PLP_DATA)(Categories));
