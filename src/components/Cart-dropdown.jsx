@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
+import CartItem from './Cart-item';
+import { connect } from 'react-redux';
+
 const DropdownContainer = styled.div`
     position: absolute;
     width: 338px;
@@ -15,10 +18,11 @@ const DropdownContainer = styled.div`
     box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
 `
 
-const CartItems = styled.div`
-    height: 240px;
+const CartItemsContainer = styled.div`
+    height: 400px;
     display: flex;
-    flex-direction: column;    
+    flex-direction: column;
+    overflow: auto;    
 `
 
 const ButtonsContainer = styled.div`
@@ -69,10 +73,16 @@ const CheckoutButton = styled.button`
 
 class CartDropdown extends Component {
   render() {
+    const {cartItems} = this.props.cartItems;
+    console.log(cartItems)
+
     return (
       <DropdownContainer>
-        <CartItems>
-        </CartItems>
+        <CartItemsContainer>
+          {cartItems.map(cartItem => (
+            <CartItem key={cartItem.id} item={cartItem}/>
+          ))}
+        </CartItemsContainer>
         <ButtonsContainer>
             <ViewBagButton>VIEW BAG</ViewBagButton>
             <CheckoutButton>CHECK OUT</CheckoutButton>
@@ -82,4 +92,8 @@ class CartDropdown extends Component {
   }
 }
 
-export default CartDropdown;
+const mapStateToProps = ({ cart : cartItems}) => ({
+  cartItems
+});
+
+export default connect(mapStateToProps)(CartDropdown);

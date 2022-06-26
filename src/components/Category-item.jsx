@@ -93,13 +93,13 @@ class CategoryItem extends Component {
     const { addProduct } = this.props;
 
     return (
-      <ProductContainer inStock={product.inStock ? null :"0.4"} cursor={product.inStock ? "pointer" : "default"}>
+      <ProductContainer inStock={product.inStock ? null :"0.5"} cursor={product.inStock ? "pointer" : "default"}>
       { product.inStock 
         ? <InStock> 
           <Image src={product.gallery[0]} alt={product.name}/> 
           <AddToCart src={AddCart} alt="cart" onClick={() => addProduct(product) }/>
           </InStock>
-          
+
         : <OutStock> <p>OUT OF STOCK</p><Image src={product.gallery[0]} alt={product.name}/> </OutStock>
       }
           <DescriptionContainer>

@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import styled from 'styled-components';
 
-import {graphql} from 'react-apollo';
-import {CURRENCY_DATA} from '../graphQL/Queries';
+import { graphql } from 'react-apollo';
+import { CURRENCY_DATA } from '../graphQL/Queries';
+
+import { connect } from 'react-redux';
+import { changeCurrency } from '../redux/currency/currency-action';
 
 
 const Switcher = styled.div`
@@ -18,24 +21,19 @@ const Switcher = styled.div`
         &:focus{
             outline: none;
         }
-
-        option{
-          content: "$";
-        }
-
     }
 `
 
 class CurrencySwitcher extends Component {
     render() {
-    const data = this.props.data; 
+    const { data, changeCurrency } = this.props; 
 
     return (
         <Switcher>
         <select
           onChange={(e) =>{
               const selectedCurrency = e.target.value;
-              this.setState({currency: selectedCurrency})
+              changeCurrency(selectedCurrency);
           }}
         >
         {data.loading ? 
@@ -51,4 +49,8 @@ class CurrencySwitcher extends Component {
   }
 }
 
-export default graphql(CURRENCY_DATA)(CurrencySwitcher);
+const mapDispatchToProps = (dispatch) => ({ 
+    changeCurrency: currency => dispatch(changeCurrency(currency))
+});
+
+export default connect(null, mapDispatchToProps)(graphql(CURRENCY_DATA)(CurrencySwitcher));
