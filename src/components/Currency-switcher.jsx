@@ -10,6 +10,7 @@ import { changeCurrency } from '../redux/currency/currency-action';
 
 const Switcher = styled.div`
     select{
+        background: transparent;
         border: none;
         padding: 2px;
         cursor: pointer;

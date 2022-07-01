@@ -35,10 +35,10 @@ const CartBadge = styled.div`
 class CartIcon extends Component {
 
   render() {
-    const { toggleCartHidden }  = this.props;
+    const { toggleCartHidden, itemCount }  = this.props;
     return (
       <LogoContainer onClick={() => toggleCartHidden()}>
-        <CartBadge>2</CartBadge>
+        <CartBadge> {itemCount} </CartBadge>
         <img src={CartLogo} alt="cart"/>
       </LogoContainer>
     )
@@ -47,6 +47,10 @@ class CartIcon extends Component {
 
 const mapDispatchToProps = dispatch => ({
     toggleCartHidden: () => dispatch(toggleCartHidden()),
-  })
+});
 
-export default connect(null, mapDispatchToProps)(CartIcon);
+const mapStateToProps = ({ cart: { cartItems } }) => ({ 
+  itemCount: cartItems.reduce((accumulatedQuantity, cartItem) => accumulatedQuantity + cartItem.quantity, 0)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartIcon);

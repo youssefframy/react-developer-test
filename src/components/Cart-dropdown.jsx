@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 const DropdownContainer = styled.div`
     position: absolute;
-    width: 338px;
+    width: 380px;
     height: 500px;
     display: flex;
     flex-direction: column;

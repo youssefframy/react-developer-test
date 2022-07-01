@@ -8,14 +8,14 @@ const ItemContainer = styled.div`
 `
 
 const Image = styled.img`
-  width: 121px;
-  height: 190px;
+  width: 160px;
+  height: 235px;
   align-items: center;
   justify-content: right;
   object-fit: cover;
 `
 const DescriptionContainer = styled.div`
-  width: 136px
+  width: 150px
 `
 
 const ValuesContainer = styled.div`
@@ -95,7 +95,7 @@ class CartItem extends Component {
         </DescriptionContainer>
         <ButtonsContainer>
             <Button>+</Button>
-            <Quantity>3</Quantity>
+            <Quantity>{item.quantity}</Quantity>
             <Button>-</Button>
         </ButtonsContainer>
         <Image src={item.gallery[0]}/>
