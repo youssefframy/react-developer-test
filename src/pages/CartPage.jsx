@@ -17,6 +17,9 @@ const ItemContainer = styled.div`
 `
 
 const EmptyMessage = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 24px;
   margin: 100px auto;
 `

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import CartAttributes from './Cart-item-attributes';
 
+import {addProduct, removeItem} from '../redux/cart/cart-action';
+import { connect } from 'react-redux';
 
 const ItemContainer = styled.div`
   display: flex;
@@ -64,7 +66,7 @@ const Quantity = styled.div`
 
 class CartItem extends Component {
   render() {
-    const { item } = this.props;
+    const { item, addItem, removeItem } = this.props;
 
     return (
       
@@ -78,13 +80,13 @@ class CartItem extends Component {
         }
         </DescriptionContainer>
         <ButtonsContainer>
-            <Button>
+            <Button onClick = {() => addItem(item)}>
               ＋
             </Button>
             <Quantity>
               <Amount>{item.quantity}</Amount>
             </Quantity>
-            <Button>-</Button>
+            <Button onClick = {() => removeItem(item)}>-</Button>
         </ButtonsContainer>
         <Image src={item.gallery[0]}/>
       </ItemContainer>
@@ -92,4 +94,9 @@ class CartItem extends Component {
   }
 }
 
-export default CartItem;
+const mapDispatchToProps = dispatch => ({
+  addItem: item => dispatch(addProduct(item)),
+  removeItem: item => dispatch(removeItem(item))
+});
+
+export default connect(null, mapDispatchToProps)(CartItem);
