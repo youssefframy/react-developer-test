@@ -6,8 +6,9 @@ import { createHttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloClient} from 'apollo-boost';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
-import store from './redux/store';
+import { store, persistor } from './redux/store';
 
 import './index.css';
 import App from './App';
@@ -38,7 +39,9 @@ root.render(
   <ApolloProvider client={client}>
     <Provider store={store}>
       <BrowserRouter>
-        <App />
+        <PersistGate persistor={persistor}>
+          <App />
+        </PersistGate>
       </BrowserRouter>
     </Provider>
   </ApolloProvider>, 
