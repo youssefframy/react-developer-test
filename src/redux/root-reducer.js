@@ -5,5 +5,5 @@ import currencyReducer from './currency/currency-reducer';
 
 export default combineReducers({
     cart: cartReducer,
-    currency: currencyReducer
+    currencySwitcher: currencyReducer
 });

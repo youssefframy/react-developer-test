@@ -1,21 +1,25 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+
 import Logo from "../assets/logo.svg";
+import CartIcon from './Cart-icon';
+
 import CartDropdown from './Cart-dropdown';
 import CurrencySwitcher from './Currency-switcher';
 
-import CartIcon from './Cart-icon';
 
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 const Container = styled.div`
   height: 20vh;
 `
 const Wrapper = styled.div`
-  width: 97%;
-  padding-top: 5vh;
+  width: 98%;
+  padding-top: 3vh;
   display: flex;
   align-items: center;
+  justify-content: center;
 `
 
 const Left = styled.div`   
@@ -26,7 +30,7 @@ const Left = styled.div`
 `
 const Center = styled.div`
   flex: 2;
-  margin-right: 10rem;
+  margin-right: 13rem;
   text-align: center;
   cursor: pointer;
 `
@@ -38,19 +42,20 @@ const Right = styled.div`
   justify-content: flex-end;
 `
 
-const Label = styled.button`
+const Label = styled.label`
   border: none;
   font-family: Raleway;
   background: transparent;
+  font-size: 15px;
+  font-weight: 400;
   padding: 1rem;
   color: ${({isActive}) => 
     isActive ? '#5ECE7B' : '#1D1F22'
   };
-  font-weight: bold;
   text-align: center;
   cursor: pointer;
   border-bottom: ${({isActive}) => 
-    isActive ? '1px solid #5ECE7B' : 'none'
+    isActive ? '2px solid #5ECE7B' : 'none'
     };
 `
 const MenuItem = styled.div`
@@ -69,24 +74,24 @@ class Header extends Component {
     super(props);
 
     this.state = {
-      currency: '$',
       active: true,
     }
   }
   
   render() {
-    const { hidden } = this.props;
+    const { hidden, history } = this.props;
+
     return (
       <Container>
         <Wrapper>
           <Left>
-              <Label isActive={this.state.active} value="ALL" >ALL</Label>
+              <Label isActive={this.state.active} value="ALL" onClick={() => history.push('/')} >ALL</Label>
               <Label value="TECH" >TECH</Label>
               <Label value="CLOTHES">CLOTHES</Label>
           </Left>
         
         <Center>
-            <img src={Logo} alt="logo"/>
+            <img src={Logo} alt="logo" onClick={() => history.push('/')} />
         </Center>
 
           <Right >
@@ -108,4 +113,4 @@ const mapStateToProps = ({cart: {hidden}}) => ({
   hidden,
 })
 
-export default connect(mapStateToProps)(Header);
+export default withRouter(connect(mapStateToProps)(Header));

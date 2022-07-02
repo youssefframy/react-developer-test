@@ -12,6 +12,7 @@ export const PLP_DATA = gql`
                 category
                 brand
                 attributes{
+                  id
                   type
                   items {
                     id

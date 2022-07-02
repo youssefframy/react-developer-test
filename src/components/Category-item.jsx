@@ -35,7 +35,7 @@ const ProductContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 5rem;
   transform: translateZ(0);
   transition: transform 0.25s ease-out;
   opacity: ${props => props.inStock};

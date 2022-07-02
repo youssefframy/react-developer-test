@@ -5,23 +5,19 @@ import Categories from '../components/Categories';
 const Container = styled.div`
   margin-inline: 3vw;
 `
-const Title = styled.h1`
-  margin-bottom: 10vh;
+const Title = styled.div`
+  margin-bottom: 12vh;
+  font-weight: 400;
+  font-size: 42px;
+  color: #1D1F22;
 `
 
 class PLP extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-
-    }
-  }
 
   render() {
     return (
       <Container>
-        <Title>ALL</Title>
+        <Title>All</Title>
         <Categories/>
       </Container>
     )

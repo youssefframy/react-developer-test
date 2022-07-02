@@ -3,15 +3,17 @@ import styled from 'styled-components';
 
 import CartItem from './Cart-item';
 
-import { selectCartItems } from '../redux/cart/cart-selectors';
+import { selectCartItems, selectCartItemsCount } from '../redux/cart/cart-selectors';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { selectCartTotal } from '../redux/cart/cart-selectors';
+
 
 
 const DropdownContainer = styled.div`
     position: absolute;
     width: 380px;
-    height: 500px;
+    height: 550px;
     display: flex;
     flex-direction: column;
     padding: 20px;
@@ -20,6 +22,16 @@ const DropdownContainer = styled.div`
     right: 40px;
     z-index: 5;
     box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+    `
+
+const TitleContainer = styled.div`
+  margin-block: 1rem;
+`
+
+const BagTitle = styled.span`
+  font-weight: 700;
+  font-size: 16px;
+  color: #1D1F22;
 `
 
 const CartItemsContainer = styled.div`
@@ -75,6 +87,26 @@ const CheckoutButton = styled.button`
     }
 `
 
+const Total = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-block: auto;
+`
+
+const Label = styled.div`
+  padding-right: 8px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+`
+const Price = styled.span`
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+
+`
+
 const EmptyMessage = styled.span`
   font-size: 24px;
   margin: 100px auto;
@@ -82,11 +114,14 @@ const EmptyMessage = styled.span`
 
 class CartDropdown extends Component {
   render() {
-    const { cartItems } = this.props.cartItems;
-    const { history } = this.props
-
+    const { cartItems, total, currency, quantity, history } = this.props;
+    
     return (
       <DropdownContainer>
+        <TitleContainer>
+          <BagTitle>My Bag, </BagTitle>
+          <span>{quantity} items</span>
+        </TitleContainer>
         <CartItemsContainer>
           {
             cartItems.length ?
@@ -96,6 +131,10 @@ class CartDropdown extends Component {
             : <EmptyMessage>Your Cart is Empty</EmptyMessage>
           }
         </CartItemsContainer>
+        <Total>
+          <Label>Total </Label>
+          <Price>{currency}{total.toFixed(2)}</Price>
+        </Total>
         <ButtonsContainer>
             <ViewBagButton onClick = {() => history.push('/cart')}>VIEW BAG</ViewBagButton>
             <CheckoutButton onClick = {() => history.push('/cart')}>CHECK OUT</CheckoutButton>
@@ -106,7 +145,10 @@ class CartDropdown extends Component {
 }
 
 const mapStateToProps = state => ({
-  cartItems: selectCartItems(state)
+  cartItems: selectCartItems(state),
+  total: selectCartTotal(state),
+  quantity: selectCartItemsCount(state),
+  currency: state.currencySwitcher.currency
 });
 
 export default withRouter(connect(mapStateToProps)(CartDropdown));

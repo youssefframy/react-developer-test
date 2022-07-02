@@ -1,101 +1,86 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import CartAttributes from './Cart-item-attributes';
+
 
 const ItemContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 2rem;
+  margin-block: 1rem;
+`
+
+const Price = styled.p`
+  font-weight: 600;
+  font-size: 16px;
+  color: #1D1F22;
 `
 
 const Image = styled.img`
-  width: 160px;
-  height: 235px;
+  width: 150px;
+  height: 190px;
   align-items: center;
   justify-content: right;
   object-fit: cover;
 `
 const DescriptionContainer = styled.div`
-  width: 150px
-`
-
-const ValuesContainer = styled.div`
-  display: flex;
-  margin-top: -1rem;
-  align-items: center;
-  justify-content: flex-start;
-`
-
-const Value = styled.p`
-  cursor : pointer;
-  padding: 5px;
-  border: 1px solid #1D1F22;
-  text-align: center;
-  justify-content: center;
-  margin-right: 8px;
-  `
-  const ColorSwatch = styled.div`
-  cursor : pointer;
-  width: 16px;
-  height: 16px;
-  margin-top: 8px;
-  border: 1px solid #1D1F22;
-  background: ${props => props.Color};
-  margin-right: 8px;
+  width: 136px;
+  gap: 8px;
 `
 
 const ButtonsContainer = styled.div`
-  width: 40px;
-  display: grid;
-  grid-template-columns: repeat(1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px;
+  width: 24px;
 `
 const Button = styled.button`
   cursor : pointer;
   background: transparent;
   border: 1px solid #1D1F22;
-  height: 40px;
+  height: 24px;
+  width: 24px;
   font-family: Raleway;
-  font-size: 30px;
-  `
+  font-size: 12px;
+  box-sizing: border-box;
+`
   
-  const Quantity = styled.p`
+const Quantity = styled.div`
+  display: flex;
+  flex: 2;
   cursor : pointer;
+  width: 24px;
   height: 60px;
-  padding-top: 4rem;
-  text-align: center;
+  align-items:center;
   justify-content: center;
+`
+  const Amount = styled.div`
+
 `
 
 class CartItem extends Component {
   render() {
-    const {item} = this.props
-    console.log(item.attributes[1]);
+    const { item } = this.props;
+
     return (
+      
       <ItemContainer>
       <DescriptionContainer>
         <p>{item.name}</p>
-        <p>{item.prices[0].currency.symbol}{item.prices[0].amount}</p>
-        <p>Size: </p>
-        <ValuesContainer>
-          {item.attributes[0] === undefined
-              ? null
-              : item.attributes[0].items.map(item => (
-                <Value key={item.id}>{item.value}</Value>
-              ))
-          }
-          </ValuesContainer>
-          <p>Color: </p>
-          <ValuesContainer>
-            {item.attributes[1] === undefined
-              ? null
-              : item.attributes[1].items.map(item => (
-                <ColorSwatch key={item.id} Color = {item.value}></ColorSwatch>
-              ))
-            }
-          </ValuesContainer>
+        <Price>{item.prices[0].currency.symbol}{item.prices[0].amount}</Price>
+        {item.attributes.map(attribute => (
+            <CartAttributes key={attribute.id} attribute = {attribute}/>
+          ))
+        }
         </DescriptionContainer>
         <ButtonsContainer>
-            <Button>+</Button>
-            <Quantity>{item.quantity}</Quantity>
+            <Button>
+              ＋
+            </Button>
+            <Quantity>
+              <Amount>{item.quantity}</Amount>
+            </Quantity>
             <Button>-</Button>
         </ButtonsContainer>
         <Image src={item.gallery[0]}/>
@@ -103,7 +88,5 @@ class CartItem extends Component {
     )
   }
 }
-
-
 
 export default CartItem;
