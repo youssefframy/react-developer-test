@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 import CartItem from './Cart-item';
+
+import { selectCartItems } from '../redux/cart/cart-selectors';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+
 
 const DropdownContainer = styled.div`
     position: absolute;
@@ -71,28 +75,38 @@ const CheckoutButton = styled.button`
     }
 `
 
+const EmptyMessage = styled.span`
+  font-size: 24px;
+  margin: 100px auto;
+`
+
 class CartDropdown extends Component {
   render() {
     const { cartItems } = this.props.cartItems;
+    const { history } = this.props
 
     return (
       <DropdownContainer>
         <CartItemsContainer>
-          {cartItems.map(cartItem => (
-            <CartItem key={cartItem.id} item={cartItem}/>
-          ))}
+          {
+            cartItems.length ?
+            cartItems.map(cartItem => (
+              <CartItem key={cartItem.id} item={cartItem}/>
+            ))
+            : <EmptyMessage>Your Cart is Empty</EmptyMessage>
+          }
         </CartItemsContainer>
         <ButtonsContainer>
-            <ViewBagButton>VIEW BAG</ViewBagButton>
-            <CheckoutButton>CHECK OUT</CheckoutButton>
+            <ViewBagButton onClick = {() => history.push('/cart')}>VIEW BAG</ViewBagButton>
+            <CheckoutButton onClick = {() => history.push('/cart')}>CHECK OUT</CheckoutButton>
         </ButtonsContainer>
       </DropdownContainer>
     )
   }
 }
 
-const mapStateToProps = ({ cart : cartItems}) => ({
-  cartItems
+const mapStateToProps = state => ({
+  cartItems: selectCartItems(state)
 });
 
-export default connect(mapStateToProps)(CartDropdown);
+export default withRouter(connect(mapStateToProps)(CartDropdown));

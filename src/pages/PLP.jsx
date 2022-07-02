@@ -6,7 +6,7 @@ const Container = styled.div`
   margin-inline: 3vw;
 `
 const Title = styled.h1`
-  margin-bottom: 15vh;
+  margin-bottom: 10vh;
 `
 
 class PLP extends Component {

@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  margin-inline: 3vw;
+`
 
 class CartPage extends Component {
   render() {
     return (
-      <div>CartPage</div>
+      <Container>
+        CartPage
+      </Container>
     )
   }
 }

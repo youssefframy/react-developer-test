@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import CartLogo from "../assets/cart.svg";
 
 import { toggleCartHidden } from '../redux/cart/cart-action';
+import { selectCartItemsCount } from '../redux/cart/cart-selectors';
 import { connect } from 'react-redux';
 
 const LogoContainer = styled.div`
@@ -49,8 +50,8 @@ const mapDispatchToProps = dispatch => ({
     toggleCartHidden: () => dispatch(toggleCartHidden()),
 });
 
-const mapStateToProps = ({ cart: { cartItems } }) => ({ 
-  itemCount: cartItems.reduce((accumulatedQuantity, cartItem) => accumulatedQuantity + cartItem.quantity, 0)
+const mapStateToProps = state => ({ 
+  itemCount: selectCartItemsCount(state)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartIcon);
