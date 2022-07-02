@@ -7,6 +7,8 @@ import { selectCartItems, selectCartItemsCount } from '../redux/cart/cart-select
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { selectCartTotal } from '../redux/cart/cart-selectors';
+import { toggleCartHidden } from '../redux/cart/cart-action';
+
 
 
 
@@ -114,7 +116,7 @@ const EmptyMessage = styled.span`
 
 class CartDropdown extends Component {
   render() {
-    const { cartItems, total, currency, quantity, history } = this.props;
+    const { cartItems, total, currency, quantity, dispatch, history } = this.props;
     
     return (
       <DropdownContainer>
@@ -136,8 +138,18 @@ class CartDropdown extends Component {
           <Price>{currency}{total.toFixed(2)}</Price>
         </Total>
         <ButtonsContainer>
-            <ViewBagButton onClick = {() => history.push('/cart')}>VIEW BAG</ViewBagButton>
-            <CheckoutButton onClick = {() => history.push('/cart')}>CHECK OUT</CheckoutButton>
+            <ViewBagButton onClick = {() => {
+              history.push('/cart');
+              dispatch(toggleCartHidden())
+              }}>
+              VIEW BAG
+              </ViewBagButton>
+            <CheckoutButton onClick = {() => {
+              history.push('/cart')
+              
+              }}>
+              CHECK OUT
+              </CheckoutButton>
         </ButtonsContainer>
       </DropdownContainer>
     )

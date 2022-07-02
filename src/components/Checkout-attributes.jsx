@@ -9,27 +9,31 @@ const ValuesContainer = styled.div`
 `
 
 const Title = styled.p`
-    font-weight: 400;
-    font-size: 1rem;
-
+    font-weight: 700;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
 `
 
 const Value = styled.p`
+  display: flex;
+  text-align: center;
+  justify-content: center;
   cursor : pointer;
   padding: 5px;
   border: 1px solid #1D1F22;
-  text-align: center;
-  justify-content: center;
   margin-right: 8px;
-  width: 63px;
+  width: 45px;
+  height: 30px;
+  font-size: 20px;
+  border-radius: 2px;
 `
-
 
   const ColorSwatch = styled.div`
   cursor : pointer;
-  width: 16px;
-  height: 16px;
-  margin-top: 8px;
+  width: 30px;
+  height: 30px;
+  margin-top: 1rem;
   border: 1px solid #1D1F22;
   background: ${props => props.Color};
   margin-right: 8px;
@@ -37,7 +41,7 @@ const Value = styled.p`
 `
 
 
-class CartAttributes extends Component {
+class CheckoutAttributes extends Component {
   render() {
     const { attribute } = this.props;
 
@@ -48,7 +52,9 @@ class CartAttributes extends Component {
                 <Title>{`${attribute.id}:`}</Title>
                 <ValuesContainer>
                     {attribute.items.map(item => (
-                        <Value key={item.id}>{item.value}</Value>
+                        <Value key={item.id}>
+                            {item.value}
+                        </Value>
                     ))}
                 </ValuesContainer>
                 </div>
@@ -71,4 +77,4 @@ class CartAttributes extends Component {
   }
 }
 
-export default CartAttributes;
+export default CheckoutAttributes;
