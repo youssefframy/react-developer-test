@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled  from 'styled-components';
-import Categories from '../components/Categories';
+import {default as Categories} from '../graphQL/Categories-query';
+
 
 const Container = styled.div`
   margin-inline: 3vw;
