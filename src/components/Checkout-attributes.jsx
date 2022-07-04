@@ -9,8 +9,9 @@ const ValuesContainer = styled.div`
 `
 
 const Title = styled.p`
-    font-weight: 700;
-    font-size: 1.2rem;
+    margin-top: -5px;
+    font-size: 1.1rem;
+    font-weight: bold;
     text-transform: uppercase;
     margin-bottom: 0.5rem;
 `

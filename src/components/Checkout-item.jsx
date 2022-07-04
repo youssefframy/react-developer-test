@@ -50,7 +50,7 @@ const CarouselButton = styled.button`
   font-family: Raleway;
   color: rgb(255, 255, 255);
   background: rgba(0, 0, 0, 0.73);
-  transition: 0.5s;
+  transition: 0.2s;
   
   &:hover{
     filter: brightness(105%);
@@ -89,6 +89,12 @@ const Button = styled.button`
   font-size: 30px;
   font-weight: 300;
   box-sizing: border-box;
+  transition: 0.2s;
+
+  &:hover{
+    color: white;
+    background: rgba(0, 0, 0, 0.9);
+  }
 `
   
 const Quantity = styled.div`
@@ -105,8 +111,23 @@ const Quantity = styled.div`
 
 
 class CheckoutItem extends Component {
+  constructor(props){
+    super(props);
+
+    this.state = {
+      index: 0,
+    }
+  }
+
   render() {
     const { item, addItem, removeItem } = this.props;
+
+    const ImageSlider = (newIndex, sign) => {
+      if (sign === '+') this.setState({ index: this.state.index + 1});
+      if (sign === '-') this.setState({ index: this.state.index - 1});
+      if(newIndex < 0) this.setState({index: item.gallery.length - 1});
+      if (newIndex >= item.gallery.length) this.setState({ index: 0 });
+    }
 
     return (  
       <ItemContainer>
@@ -127,10 +148,20 @@ class CheckoutItem extends Component {
             <Button onClick = {() => removeItem(item)}>−</Button>
         </ButtonsContainer>
         <ImageContainer>
-          <Image src={item.gallery[0]}/>
+          <Image src={item.gallery[this.state.index]}/>
           <CarouselButtonContainer>
-            <CarouselButton>＜</CarouselButton>
-            <CarouselButton>＞</CarouselButton>
+            <CarouselButton onClick = {() => {
+              const newIndex = this.state.index - 1;
+              ImageSlider(newIndex, '-')
+            }}>
+              ＜
+            </CarouselButton>
+            <CarouselButton onClick = {() => {
+              const newIndex = this.state.index + 1;
+              ImageSlider(newIndex, '+')
+              }}>
+              ＞
+            </CarouselButton>
           </CarouselButtonContainer>
         </ImageContainer>
       </ItemContainer>
