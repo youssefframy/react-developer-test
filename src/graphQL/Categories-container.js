@@ -39,7 +39,7 @@ const GET_CATEGORIES = gql`
 
 class CategoriesQuery extends Component {
     render() {
-      const { categoryTitle } = this.props;
+      const { title } = this.props;
 
       return (
         <Query query={GET_CATEGORIES}>
@@ -54,8 +54,8 @@ class CategoriesQuery extends Component {
     }
 }
 
-const mapStateToProps = ({categoryTitle: categoryTitle}) => ({
-    categoryTitle
-})
+const mapStateToProps = state => ({
+    title: state.category.categoryTitle
+});
 
 export default connect(mapStateToProps)(CategoriesQuery);

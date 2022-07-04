@@ -15,7 +15,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
     cart: cartReducer,
     currencySwitcher: currencyReducer,
-    categoryTitle: categoryReducer
+    category: categoryReducer
 });
 
 export default persistReducer(persistConfig, rootReducer);
