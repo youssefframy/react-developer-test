@@ -132,8 +132,7 @@ class CheckoutItem extends Component {
     return (  
       <ItemContainer>
       <DescriptionContainer>
-        
-        <p>{item.name}</p>
+        <p>{item.brand} {item.name}</p>
         <Price>{item.prices[0].currency.symbol}{item.prices[0].amount}</Price>
         {item.attributes.map(attribute => (
             <CheckoutAttributes key={attribute.id} attribute = {attribute}/>

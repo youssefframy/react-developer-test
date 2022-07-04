@@ -9,7 +9,7 @@ import CurrencySwitcher from './Currency-switcher';
 
 import { changeCategory } from '../redux/category/category-action';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 const Container = styled.div`
   height: 20vh;
@@ -95,27 +95,33 @@ class Header extends Component {
       <Container>
         <Wrapper>
           <Left>
+            <Link to={`/`}>
               <Label className={All} value="all" onClick={(e) => {
-                  this.setState({ all: true, tech: false, clothes: false });
-                  const categoryName = (e.target.innerHTML);
-                  changeCategory(categoryName);
+                this.setState({ all: true, tech: false, clothes: false });
+                const categoryName = (e.target.innerHTML);
+                changeCategory(categoryName);
               }}>
               all
               </Label>
-              <Label className={Tech} onClick={(e) => {
-                this.setState({ tech: true, all: false, clothes: false});
-                const categoryName = (e.target.innerHTML);
-                changeCategory(categoryName);
-              }}>
-              tech
-              </Label>
-              <Label className={Clothes} onClick={(e) => {
-                this.setState({ clothes: true, all: false, tech: false});
-                const categoryName = (e.target.innerHTML);
-                changeCategory(categoryName);
-              }}>
-                clothes
-              </Label>
+            </Link>
+            <Link to={`/`}>
+                <Label className={Tech} onClick={(e) => {
+                  this.setState({ tech: true, all: false, clothes: false});
+                  const categoryName = (e.target.innerHTML);
+                  changeCategory(categoryName);
+                }}>
+                tech
+                </Label>
+              </Link>
+              <Link to={`/`}>        
+                <Label className={Clothes} onClick={(e) => {
+                  this.setState({ clothes: true, all: false, tech: false});
+                  const categoryName = (e.target.innerHTML);
+                  changeCategory(categoryName);
+                }}>
+                  clothes
+                </Label>
+              </Link>
           </Left>
         
         <Center>

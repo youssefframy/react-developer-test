@@ -13,8 +13,8 @@ const Container = styled.div`
 `
 class Categories extends Component {
   render() {
-    const { data, currency } = this.props;
-    
+    const { data } = this.props;
+
     return (
       <Container>
         {data.category.products.map(product => { 

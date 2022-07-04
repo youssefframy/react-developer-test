@@ -16,7 +16,7 @@ class App extends Component {
         <Header/>
         <Switch>
           <Route exact path = '/' component = {PLP} />
-          <Route path = '/shop' component = {PDP} />
+          <Route path = '/product/:productID' component = {PDP} />
           <Route exact path = '/cart' component   = {CartPage} />
         </Switch>
       </div>

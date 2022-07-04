@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import AddCart from "../assets/addCart.svg";
 
+import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
 import { addProduct } from '../redux/cart/cart-action';
 
@@ -72,6 +73,10 @@ const OutStock = styled.div`
 
 const DescriptionContainer= styled.div`
   width: 356px;
+
+  a{
+    text-decoration: none;
+  }
 `
 
 const Description = styled.p`
@@ -95,14 +100,18 @@ class CategoryItem extends Component {
       <ProductContainer inStock={product.inStock ? null :"0.5"} cursor={product.inStock ? "pointer" : "default"}>
       { product.inStock 
         ? <InStock> 
-          <Image src={product.gallery[0]} alt={product.name}/> 
+          <Link to={`/product/${product.id}`}>
+            <Image src={product.gallery[0]} alt={product.name}/> 
+          </Link>
           <AddToCart src={AddCart} alt="cart" onClick={() => addProduct(product) }/>
           </InStock>
 
         : <OutStock> <p>OUT OF STOCK</p><Image src={product.gallery[0]} alt={product.name}/> </OutStock>
       }
           <DescriptionContainer>
-            <Description>{product.brand} {product.name}</Description>
+            <Link to={`/product/${product.id}`}>
+              <Description>{product.brand} {product.name}</Description>
+            </Link>
             <Price>{`${selectedCurrency[0].currency.symbol} ${selectedCurrency[0].amount}`}</Price>
           </DescriptionContainer>
     </ProductContainer>
