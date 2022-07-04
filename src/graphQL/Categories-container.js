@@ -7,8 +7,9 @@ import { connect } from 'react-redux';
 
 
 const GET_CATEGORIES = gql`
+    query category($title: String!)
     {
-        category{
+        category (input: {title: $title}) {
             products{
                 id
                 name
@@ -42,10 +43,13 @@ class CategoriesQuery extends Component {
       const { title } = this.props;
 
       return (
-        <Query query={GET_CATEGORIES}>
+        <Query 
+            query={GET_CATEGORIES}
+            variables= {{title: title}}
+        >
             {
                 ({loading, data}) => {
-                    if (loading) return <h1>Loading</h1>;
+                    if (loading) return <h1>Loading</h1>;  
                     return <Categories data = {data}/>
                 }
             }

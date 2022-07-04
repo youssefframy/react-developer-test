@@ -14,8 +14,7 @@ const Container = styled.div`
 class Categories extends Component {
   render() {
     const { data, currency } = this.props;
-    console.log(currency);
-
+    
     return (
       <Container>
         {data.category.products.map(product => { 
