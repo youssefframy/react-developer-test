@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import CategoryItem from './Category-item';
+
+
 
 const Container = styled.div`
     display: flex;
@@ -10,13 +13,12 @@ const Container = styled.div`
 `
 class Categories extends Component {
   render() {
-    const { data } = this.props;
-     
+    const { data, currency } = this.props;
+    console.log(currency);
+
     return (
       <Container>
-        {data.loading 
-          ? <h1>Loading...</h1> 
-          : data.category.products.map(product => { 
+        {data.category.products.map(product => { 
             product.prices = product.prices.filter((price) => { 
               return price.currency.symbol === "$"
             });
@@ -28,7 +30,10 @@ class Categories extends Component {
   }
 }
 
+const mapStateToProps = state => ({ 
+  currency: state.currencySwitcher.currency
+})
+  
 
 
-
-export default Categories;
+export default connect(mapStateToProps)(Categories);

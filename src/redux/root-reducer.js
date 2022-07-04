@@ -4,7 +4,7 @@ import storage from 'redux-persist/lib/storage';
 
 import cartReducer from './cart/cart-reducer';
 import currencyReducer from './currency/currency-reducer';
-import productReducer from './product/product-reducer';
+import categoryReducer from './category/category-reducer';
 
 const persistConfig = {
     key: 'root',
@@ -15,7 +15,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
     cart: cartReducer,
     currencySwitcher: currencyReducer,
-    products: productReducer
+    categoryTitle: categoryReducer
 });
 
 export default persistReducer(persistConfig, rootReducer);

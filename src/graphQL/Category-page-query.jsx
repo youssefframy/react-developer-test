@@ -39,7 +39,10 @@ const GET_CATEGORY_BY_TITLE = gql`
 class CategoryPage extends Component {
     render() {
       return (
-        <Query query={GET_CATEGORY_BY_TITLE}>
+        <Query 
+        query={GET_CATEGORY_BY_TITLE}
+
+        >
             {
                 ({loading, data}) => {
                     if (loading) return <h1>Loading</h1>;

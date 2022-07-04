@@ -3,7 +3,6 @@ import { filterProducts } from "./currency-utils";
 
 const INITIAL_STATE = {
     currency: "$",
-    filteredProducts: [],
 }
 
 const currencyReducer = (state = INITIAL_STATE, action) => { 

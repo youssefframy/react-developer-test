@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 import { gql } from 'apollo-boost';
 import Categories from '../components/Categories';
+import { connect } from 'react-redux';
+
+
 
 const GET_CATEGORIES = gql`
     {
         category{
-            name
             products{
                 id
                 name
@@ -37,6 +39,8 @@ const GET_CATEGORIES = gql`
 
 class CategoriesQuery extends Component {
     render() {
+      const { categoryTitle } = this.props;
+
       return (
         <Query query={GET_CATEGORIES}>
             {
@@ -50,4 +54,8 @@ class CategoriesQuery extends Component {
     }
 }
 
-export default CategoriesQuery;
+const mapStateToProps = ({categoryTitle: categoryTitle}) => ({
+    categoryTitle
+})
+
+export default connect(mapStateToProps)(CategoriesQuery);

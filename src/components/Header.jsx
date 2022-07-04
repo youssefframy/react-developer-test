@@ -7,7 +7,7 @@ import CartIcon from './Cart-icon';
 import CartDropdown from './Cart-dropdown';
 import CurrencySwitcher from './Currency-switcher';
 
-
+import { changeCategory } from '../redux/category/category-action';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
@@ -22,11 +22,13 @@ const Wrapper = styled.div`
   justify-content: center;
 `
 
-const Left = styled.div`   
+const Left = styled.ul`   
   flex: 2;
   text-align: flex-start;
-  padding-left: 3vw;
+  padding-left: 2vw;
   align-items: center;
+  text-decoration: none;
+  list-style-type: none;
 `
 const Center = styled.div`
   flex: 2;
@@ -42,21 +44,24 @@ const Right = styled.div`
   justify-content: flex-end;
 `
 
-const Label = styled.label`
+const Label = styled.li`
+  display: inline-block;
   border: none;
   font-family: Raleway;
   background: transparent;
+  text-transform: uppercase;
   font-size: 15px;
   font-weight: 400;
   padding: 1rem;
-  color: ${({isActive}) => 
-    isActive ? '#5ECE7B' : '#1D1F22'
-  };
   text-align: center;
   cursor: pointer;
-  border-bottom: ${({isActive}) => 
-    isActive ? '2px solid #5ECE7B' : 'none'
-    };
+  transition: all 0.4s;
+
+  &.active{
+    color: #5ECE7B;
+    border-bottom: 2px solid #5ECE7B;
+  }
+
 `
 const MenuItem = styled.div`
   position: relative;
@@ -74,20 +79,43 @@ class Header extends Component {
     super(props);
 
     this.state = {
-      active: true,
+      all: true,
+      tech: false,
+      clothes: false
     }
   }
   
   render() {
-    const { hidden, history } = this.props;
+    const { hidden, history, changeCategory } = this.props;
+    const All = this.state.all ? 'active' : 'hidden'; 
+    const Tech = this.state.tech ? 'active' : 'hidden'; 
+    const Clothes = this.state.clothes ? 'active' : 'hidden'; 
 
     return (
       <Container>
         <Wrapper>
           <Left>
-              <Label isActive={this.state.active} value="ALL" onClick={() => history.push('/')} >ALL</Label>
-              <Label value="TECH" >TECH</Label>
-              <Label value="CLOTHES">CLOTHES</Label>
+              <Label className={All} value="all" onClick={(e) => {
+                  this.setState({ all: true, tech: false, clothes: false });
+                  const categoryName = (e.target.innerHTML);
+                  changeCategory(categoryName);
+              }}>
+              all
+              </Label>
+              <Label className={Tech} onClick={(e) => {
+                this.setState({ tech: true, all: false, clothes: false});
+                const categoryName = (e.target.innerHTML);
+                changeCategory(categoryName);
+              }}>
+              tech
+              </Label>
+              <Label className={Clothes} onClick={(e) => {
+                this.setState({ clothes: true, all: false, tech: false});
+                const categoryName = (e.target.innerHTML);
+                changeCategory(categoryName);
+              }}>
+                clothes
+              </Label>
           </Left>
         
         <Center>
@@ -113,4 +141,8 @@ const mapStateToProps = ({cart: {hidden}}) => ({
   hidden,
 })
 
-export default withRouter(connect(mapStateToProps)(Header));
+const mapDispatchToProps = (dispatch) => ({
+  changeCategory: (category) => dispatch(changeCategory(category))
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));
