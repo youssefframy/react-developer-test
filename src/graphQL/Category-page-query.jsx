@@ -3,9 +3,10 @@ import { Query } from 'react-apollo';
 import { gql } from 'apollo-boost';
 import Categories from '../components/Categories';
 
-const GET_CATEGORIES = gql`
+const GET_CATEGORY_BY_TITLE = gql`
+    query category($title: String!)
     {
-        category{
+        category (input: {title: $title}){
             name
             products{
                 id
@@ -35,19 +36,10 @@ const GET_CATEGORIES = gql`
     }
 `;
 
-class CategoriesQuery extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            label: "test"
-        }
-    }
-
+class CategoryPage extends Component {
     render() {
-
       return (
-        <Query query={GET_CATEGORIES}>
+        <Query query={GET_CATEGORY_BY_TITLE}>
             {
                 ({loading, data}) => {
                     if (loading) return <h1>Loading</h1>;
@@ -59,4 +51,4 @@ class CategoriesQuery extends Component {
     }
 }
 
-export default CategoriesQuery;
+export default CategoryPage;

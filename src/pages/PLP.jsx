@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled  from 'styled-components';
-import {default as Categories} from '../graphQL/Categories-query';
+import {default as Categories} from '../graphQL/Categories-container';
 
 
 const Container = styled.div`

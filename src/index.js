@@ -12,7 +12,6 @@ import { store, persistor } from './redux/store';
 
 import './index.css';
 import App from './App';
-// import {resolvers, typeDefs} from './graphQL/resolver';
 import reportWebVitals from './reportWebVitals';
 
 const httpLink = createHttpLink({ 
@@ -24,8 +23,6 @@ const cache = new InMemoryCache();
 const client = new ApolloClient({ 
   link: httpLink,
   cache: cache,
-  // typeDefs,
-  // resolvers
 });
 
 client.writeData({ 

@@ -13,14 +13,51 @@ const ItemContainer = styled.div`
   border-top: 1px solid #E5E5E5;
 `
 
-const Image = styled.img`
-    flex: 2;
-    width: 200px;
-    height: 288px;
-    align-items: center;
-    justify-content: right;
-    object-fit: cover;
+const ImageContainer = styled.div`
+  position: relative;
+  width: 200px;
+  height: 288px;
 `
+
+const Image = styled.img`
+  flex: 2;
+  width: 200px;
+  height: 288px;
+  align-items: center;
+  justify-content: right;
+  object-fit: cover;
+`
+const CarouselButtonContainer  = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 4px;
+`
+
+const CarouselButton = styled.button`
+  cursor: pointer;
+  margin-top: -41px;
+  margin-right: 8px;
+  border: none;
+  width: 24px;
+  height: 24px;
+  font-size: 18px;
+  font-weight: 200;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: Raleway;
+  color: rgb(255, 255, 255);
+  background: rgba(0, 0, 0, 0.73);
+  transition: 0.5s;
+  
+  &:hover{
+    filter: brightness(105%);
+    background: rgba(0, 0, 0, 0.9);
+  }
+`
+
 const DescriptionContainer = styled.div`
   flex: 8;  
   width: 136px;
@@ -89,7 +126,13 @@ class CheckoutItem extends Component {
             </Quantity>
             <Button onClick = {() => removeItem(item)}>−</Button>
         </ButtonsContainer>
-        <Image src={item.gallery[0]}/>
+        <ImageContainer>
+          <Image src={item.gallery[0]}/>
+          <CarouselButtonContainer>
+            <CarouselButton>＜</CarouselButton>
+            <CarouselButton>＞</CarouselButton>
+          </CarouselButtonContainer>
+        </ImageContainer>
       </ItemContainer>
     )
   }
