@@ -5,7 +5,7 @@ import Logo from "../assets/logo.svg";
 import CartIcon from './Cart-icon';
 
 import CartDropdown from './Cart-dropdown';
-import CurrencySwitcher from './Currency-switcher';
+import { default as CurrencySwitcher} from '../graphQL/Currency-container';
 
 import { changeCategory } from '../redux/category/category-action';
 import { connect } from 'react-redux';

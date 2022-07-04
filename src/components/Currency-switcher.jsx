@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components';
 
-import { graphql } from 'react-apollo';
-import { CURRENCY_DATA } from '../graphQL/Queries';
+
 
 import { connect } from 'react-redux';
 import { changeCurrency } from '../redux/currency/currency-action';
@@ -53,4 +52,4 @@ const mapDispatchToProps = (dispatch) => ({
     changeCurrency: currency => dispatch(changeCurrency(currency))
 });
 
-export default connect(null, mapDispatchToProps)(graphql(CURRENCY_DATA)(CurrencySwitcher));
+export default connect(null, mapDispatchToProps)(CurrencySwitcher);

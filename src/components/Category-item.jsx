@@ -74,7 +74,7 @@ const OutStock = styled.div`
 const DescriptionContainer= styled.div`
   width: 356px;
 
-  a{
+  a{ 
     text-decoration: none;
   }
 `
