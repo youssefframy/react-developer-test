@@ -72,7 +72,7 @@ class CartItem extends Component {
       
       <ItemContainer>
       <DescriptionContainer>
-        <p>{item.name}</p>
+        <p>{item.brand} {item.name}</p>
         <Price>{item.prices[0].currency.symbol}{item.prices[0].amount}</Price>
         {item.attributes.map(attribute => (
             <CartAttributes key={attribute.id} attribute = {attribute}/>

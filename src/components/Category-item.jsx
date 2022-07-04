@@ -102,7 +102,7 @@ class CategoryItem extends Component {
         : <OutStock> <p>OUT OF STOCK</p><Image src={product.gallery[0]} alt={product.name}/> </OutStock>
       }
           <DescriptionContainer>
-            <Description>{product.name}</Description>
+            <Description>{product.brand} {product.name}</Description>
             <Price>{`${selectedCurrency[0].currency.symbol} ${selectedCurrency[0].amount}`}</Price>
           </DescriptionContainer>
     </ProductContainer>

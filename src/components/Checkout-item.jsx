@@ -132,6 +132,7 @@ class CheckoutItem extends Component {
     return (  
       <ItemContainer>
       <DescriptionContainer>
+        
         <p>{item.name}</p>
         <Price>{item.prices[0].currency.symbol}{item.prices[0].amount}</Price>
         {item.attributes.map(attribute => (
@@ -149,7 +150,9 @@ class CheckoutItem extends Component {
         </ButtonsContainer>
         <ImageContainer>
           <Image src={item.gallery[this.state.index]}/>
-          <CarouselButtonContainer>
+          {item.gallery.length === 1 
+          ? null 
+          : <CarouselButtonContainer>
             <CarouselButton onClick = {() => {
               const newIndex = this.state.index - 1;
               ImageSlider(newIndex, '-')
@@ -163,6 +166,7 @@ class CheckoutItem extends Component {
               ＞
             </CarouselButton>
           </CarouselButtonContainer>
+        } 
         </ImageContainer>
       </ItemContainer>
     )

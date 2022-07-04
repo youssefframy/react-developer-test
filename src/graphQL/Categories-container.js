@@ -12,6 +12,7 @@ const GET_CATEGORIES = gql`
         category (input: {title: $title}) {
             products{
                 id
+                brand
                 name
                 gallery
                 inStock
