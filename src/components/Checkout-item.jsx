@@ -120,7 +120,7 @@ class CheckoutItem extends Component {
   }
 
   render() {
-    const { item, addItem, removeItem } = this.props;
+    const { item, addItem, removeItem, currencyIndex } = this.props;
 
     const ImageSlider = (newIndex, sign) => {
       if (sign === '+') this.setState({ index: this.state.index + 1});
@@ -133,7 +133,7 @@ class CheckoutItem extends Component {
       <ItemContainer>
       <DescriptionContainer>
         <p>{item.brand} {item.name}</p>
-        <Price>{item.prices[0].currency.symbol}{item.prices[0].amount}</Price>
+        <Price>{item.prices[currencyIndex].currency.symbol}{item.prices[currencyIndex].amount}</Price>
         {item.attributes.map(attribute => (
             <CheckoutAttributes key={attribute.id} attribute = {attribute}/>
           ))
@@ -177,4 +177,8 @@ const mapDispatchToProps = dispatch => ({
   removeItem: item => dispatch(removeItem(item))
 });
 
-export default connect(null, mapDispatchToProps)(CheckoutItem);
+const mapStateToProps = (state) => ({
+  currencyIndex: state.currencySwitcher.currencyIndex
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CheckoutItem);

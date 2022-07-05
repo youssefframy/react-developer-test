@@ -18,9 +18,6 @@ class Categories extends Component {
     return (
       <Container>
         {data.category.products.map(product => { 
-            product.prices = product.prices.filter((price) => { 
-              return price.currency.symbol === "$"
-            });
             return(
               <CategoryItem key={product.id} selectedCurrency={product.prices} product={product}/>
         )})}

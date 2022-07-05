@@ -49,6 +49,12 @@ const Button = styled.button`
   font-weight: 300;
   justify-content: center;
   box-sizing: border-box;
+  transition: 0.2s;
+
+  &:hover{
+    color: white;
+    background: rgba(0, 0, 0, 0.9);
+}
 `
   
 const Quantity = styled.div`
@@ -66,14 +72,14 @@ const Quantity = styled.div`
 
 class CartItem extends Component {
   render() {
-    const { item, addItem, removeItem } = this.props;
+    const { item, addItem, removeItem, currencyIndex } = this.props;
 
     return (
       
       <ItemContainer>
       <DescriptionContainer>
         <p>{item.brand} {item.name}</p>
-        <Price>{item.prices[0].currency.symbol}{item.prices[0].amount}</Price>
+        <Price>{item.prices[currencyIndex].currency.symbol}{item.prices[currencyIndex].amount}</Price>
         {item.attributes.map(attribute => (
             <CartAttributes key={attribute.id} attribute = {attribute}/>
           ))
@@ -99,4 +105,8 @@ const mapDispatchToProps = dispatch => ({
   removeItem: item => dispatch(removeItem(item))
 });
 
-export default connect(null, mapDispatchToProps)(CartItem);
+const mapStateToProps = (state) => ({
+  currencyIndex: state.currencySwitcher.currencyIndex
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartItem);

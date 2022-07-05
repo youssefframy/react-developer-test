@@ -94,7 +94,7 @@ const Price = styled.p`
 class CategoryItem extends Component {
 
   render() {
-    const {product, selectedCurrency, addProduct} = this.props;
+    const {product, selectedCurrency, addProduct, currencyIndex} = this.props;
     
     return (
       <ProductContainer inStock={product.inStock ? null :"0.5"} cursor={product.inStock ? "pointer" : "default"}>
@@ -112,7 +112,7 @@ class CategoryItem extends Component {
             <Link to={`/product/${product.id}`}>
               <Description>{product.brand} {product.name}</Description>
             </Link>
-            <Price>{`${selectedCurrency[0].currency.symbol} ${selectedCurrency[0].amount}`}</Price>
+            <Price>{`${selectedCurrency[currencyIndex].currency.symbol} ${selectedCurrency[currencyIndex].amount}`}</Price>
           </DescriptionContainer>
     </ProductContainer>
     )
@@ -123,4 +123,8 @@ const mapDispatchToProps = (dispatch) => ({
   addProduct: product => dispatch(addProduct(product))
 });
 
-export default connect(null, mapDispatchToProps)(CategoryItem);
+const mapStateToProps = (state) => ({
+  currencyIndex: state.currencySwitcher.currencyIndex
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryItem);

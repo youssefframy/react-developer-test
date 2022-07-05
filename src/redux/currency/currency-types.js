@@ -1,7 +1,7 @@
 const CurrencyActionTypes = {
+    ADD_CURRENCIES : "ADD_CURRENCIES",
     SWITCH_CURRENCIES: 'SWITCH_CURRENCIES',
-    ADD_DATA: 'ADD_DATA',
-    FILTER_DATA: 'FILTER_DATA'
+    CURRENCY_INDEX: 'CURRENCY_INDEX'
 };
 
 export default CurrencyActionTypes;
