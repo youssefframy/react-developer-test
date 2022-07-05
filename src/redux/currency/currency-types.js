@@ -1,6 +1,7 @@
 const CurrencyActionTypes = {
     SWITCH_CURRENCIES: 'SWITCH_CURRENCIES',
-    FILTER_PRODUCTS: 'FILTER_PRODUCTS'
+    ADD_DATA: 'ADD_DATA',
+    FILTER_DATA: 'FILTER_DATA'
 };
 
 export default CurrencyActionTypes;

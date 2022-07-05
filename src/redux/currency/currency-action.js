@@ -5,9 +5,13 @@ export const changeCurrency = currency => ({
     payload: currency
 });
 
+export const addData = data => ({
+    type: CurrencyActionTypes.ADD_DATA,
+    payload: data
+});
 
 
-export const filterProducts = products => ({
-    type: CurrencyActionTypes.FILTER_PRODUCTS,
+export const filterData = products => ({
+    type: CurrencyActionTypes.SWITCH_CURRENCIES,
     payload: products
 });

@@ -13,17 +13,5 @@ code {
 }
 
 ::-webkit-scrollbar {
-  width: 0.15rem;
-  height: 0.15rem;
-}
-
-::-webkit-scrollbar-track{
-  background: #e6e6e6;
-  border-radius: 100vw;
-  margin-block: .5rem;
-}
-
-::-webkit-scrollbar-thumb{
-  background: linear-gradient(to top, #56bb71, #5ECE7B, #e6e6e6,#FFFFFF);
-  border-radius: 100vw;
+  width: 0
 }

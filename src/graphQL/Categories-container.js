@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 import { gql } from 'apollo-boost';
 import Categories from '../components/Categories';
-import { connect } from 'react-redux';
 
+
+import { connect } from 'react-redux';
+import { addData } from '../redux/currency/currency-action';
 
 
 const GET_CATEGORIES = gql`
@@ -41,7 +43,7 @@ const GET_CATEGORIES = gql`
 
 class CategoriesQuery extends Component {
     render() {
-      const { title } = this.props;
+      const { title, addData } = this.props;
 
       return (
         <Query 
@@ -50,7 +52,8 @@ class CategoriesQuery extends Component {
         >
             {
                 ({loading, data}) => {
-                    if (loading) return <h1>Loading</h1>;  
+                    if (loading) return <h1>Loading...</h1>;
+                    addData(data.category.products)  
                     return <Categories data = {data}/>
                 }
             }
@@ -63,4 +66,8 @@ const mapStateToProps = state => ({
     title: state.category.categoryTitle
 });
 
-export default connect(mapStateToProps)(CategoriesQuery);
+const mapDispatchToProps = (dispatch) => ({
+    addData: data => dispatch(addData(data))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(CategoriesQuery);

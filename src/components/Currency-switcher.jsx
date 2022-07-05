@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 
 import { connect } from 'react-redux';
-import { changeCurrency } from '../redux/currency/currency-action';
+import { changeCurrency, filterData } from '../redux/currency/currency-action';
 
 
 const Switcher = styled.div`
@@ -33,6 +33,7 @@ class CurrencySwitcher extends Component {
           onChange={(e) =>{
               const selectedCurrency = e.target.value;
               changeCurrency(selectedCurrency);
+              filterData();
           }}
         >
         {data.loading ? 
@@ -49,7 +50,8 @@ class CurrencySwitcher extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({ 
-    changeCurrency: currency => dispatch(changeCurrency(currency))
+    changeCurrency: currency => dispatch(changeCurrency(currency)),
+    filterData: () => dispatch(filterData())
 });
 
 export default connect(null, mapDispatchToProps)(CurrencySwitcher);

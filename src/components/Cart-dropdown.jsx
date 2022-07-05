@@ -13,18 +13,18 @@ import { toggleCartHidden } from '../redux/cart/cart-action';
 
 
 const DropdownContainer = styled.div`
-    position: absolute;
-    width: 380px;
-    height: 550px;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    background-color: white;
-    top: 90px;
-    right: 40px;
-    z-index: 5;
-    box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
-    `
+  position: absolute;
+  width: 380px;
+  height: 550px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: white;
+  top: 90px;
+  right: 40px;
+  z-index: 5;
+  box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+`
 
 const TitleContainer = styled.div`
   margin-block: 1rem;
@@ -37,10 +37,25 @@ const BagTitle = styled.span`
 `
 
 const CartItemsContainer = styled.div`
-    height: 400px;
-    display: flex;
-    flex-direction: column;
-    overflow: auto;    
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+      
+  ::-webkit-scrollbar {
+    width: 0.18rem;
+  }
+
+  ::-webkit-scrollbar-track{
+  background: #e6e6e6;
+  border-radius: 100vw;
+  margin-block: .5rem;
+  }
+
+  ::-webkit-scrollbar-thumb{
+  background: linear-gradient(to top, #56bb71, #5ECE7B, #e6e6e6,#FFFFFF);
+  border-radius: 100vw;
+  }
 `
 
 const ButtonsContainer = styled.div`

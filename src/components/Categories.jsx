@@ -7,8 +7,8 @@ import CategoryItem from './Category-item';
 
 const Container = styled.div`
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
     flex-wrap: wrap;
 `
 class Categories extends Component {

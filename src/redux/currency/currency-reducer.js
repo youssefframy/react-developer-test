@@ -1,8 +1,10 @@
 import CurrencyActionTypes from "./currency-types";
-import { filterProducts } from "./currency-utils";
+import { filterData } from "./currency-utils";
 
 const INITIAL_STATE = {
     currency: "$",
+    data: [],
+    filteredDataByPrice: []
 }
 
 const currencyReducer = (state = INITIAL_STATE, action) => { 
@@ -10,15 +12,17 @@ const currencyReducer = (state = INITIAL_STATE, action) => {
         case CurrencyActionTypes.SWITCH_CURRENCIES:
           return {
             ...state,
-            currency: action.payload
+            currency: action.payload,
+            filteredDataByPrice: filterData(state.data, state.currency)
+          }
+
+        case CurrencyActionTypes.ADD_DATA:
+          return{
+            ...state,
+            data: action.payload
           }
 
 
-        case CurrencyActionTypes.FILTER_PRODUCTS:
-        return {
-            ...state,
-            filteredProducts: filterProducts(action.payload, state.currency)
-        }
         default:
             return state;
     }
