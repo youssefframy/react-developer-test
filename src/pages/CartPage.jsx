@@ -6,7 +6,7 @@ import CheckoutItem from '../components/Checkout-item';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import { selectCartItems, selectCartTotal } from '../redux/cart/cart-selectors';
+import { selectCartItems } from '../redux/cart/cart-selectors';
 
 const Container = styled.div`
   margin-inline: 3vw;
@@ -43,13 +43,13 @@ class CartPage extends Component {
             : <EmptyMessage>Your Cart is Empty</EmptyMessage>
           }
         </ItemContainer>
-        <CheckoutTotal total={total}/>
+        <CheckoutTotal cartItems={cartItems}/>
       </Container>
     )
   }
 }
 
-const mapStateToProps = createStructuredSelector({ cartItems: selectCartItems, total: selectCartTotal})
+const mapStateToProps = createStructuredSelector({ cartItems: selectCartItems })
 
 
 export default connect(mapStateToProps)(CartPage);

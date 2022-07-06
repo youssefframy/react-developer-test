@@ -6,7 +6,6 @@ import CartItem from './Cart-item';
 import { selectCartItems, selectCartItemsCount } from '../redux/cart/cart-selectors';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { selectCartTotal } from '../redux/cart/cart-selectors';
 import { toggleCartHidden } from '../redux/cart/cart-action';
 
 
@@ -131,7 +130,11 @@ const EmptyMessage = styled.span`
 
 class CartDropdown extends Component {
   render() {
-    const { cartItems, total, currency, quantity, dispatch, history } = this.props;
+    const { cartItems, currency, currencyIndex, quantity, dispatch, history } = this.props;
+    let totalAmount = 0;
+    cartItems.forEach((item) => {
+      totalAmount += item.prices[currencyIndex].amount * item.quantity;
+    });
     
     return (
       <DropdownContainer>
@@ -150,7 +153,7 @@ class CartDropdown extends Component {
         </CartItemsContainer>
         <Total>
           <Label>Total </Label>
-          <Price>{currency}{total.toFixed(2)}</Price>
+          <Price>{currency}{totalAmount.toFixed(2)}</Price>
         </Total>
         <ButtonsContainer>
             <ViewBagButton onClick = {() => {
@@ -173,9 +176,9 @@ class CartDropdown extends Component {
 
 const mapStateToProps = state => ({
   cartItems: selectCartItems(state),
-  total: selectCartTotal(state),
+  currencyIndex: state.currencySwitcher.currencyIndex,
+  currency: state.currencySwitcher.currency,
   quantity: selectCartItemsCount(state),
-  currency: state.currencySwitcher.currency
 });
 
 export default withRouter(connect(mapStateToProps)(CartDropdown));

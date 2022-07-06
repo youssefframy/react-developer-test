@@ -57,8 +57,12 @@ const OrderButton = styled.button`
 
 class CheckoutTotal extends Component {
   render() {
-    const { currency, total, itemCount } = this.props;
-    const taxes = total*0.21
+    const { currency, cartItems, itemCount, currencyIndex } = this.props;
+    let totalAmount = 0;
+    cartItems.forEach((item) => {
+      totalAmount += item.prices[currencyIndex].amount * item.quantity;
+    });
+    const taxes = totalAmount * 0.21
 
     return (
       <TotalContainer>
@@ -72,7 +76,7 @@ class CheckoutTotal extends Component {
         </PriceContainer>
         <PriceContainer>
             <Label>Total: </Label>
-            <Price>{currency}{(total + taxes).toFixed(2)}</Price>
+            <Price>{currency}{(totalAmount).toFixed(2)}</Price>
         </PriceContainer>
         <OrderButton>ORDER</OrderButton>
       </TotalContainer>
@@ -82,6 +86,7 @@ class CheckoutTotal extends Component {
 
 const mapStateToProps = state => ({
     currency: state.currencySwitcher.currency,
+    currencyIndex: state.currencySwitcher.currencyIndex,
     itemCount: selectCartItemsCount(state)
 })
 
