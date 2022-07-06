@@ -24,12 +24,9 @@ const EmptyMessage = styled.span`
   margin: 100px auto;
 `
 
-
-
 class CartPage extends Component {
-  
   render() {
-    const {cartItems, total} = this.props;
+    const {cartItems} = this.props;
 
     return (
       <Container>
