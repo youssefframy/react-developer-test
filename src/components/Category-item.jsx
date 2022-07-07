@@ -5,7 +5,6 @@ import AddCart from "../assets/addCart.svg";
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
 import { addProduct } from '../redux/cart/cart-action';
-import { addProductByID } from '../redux/product/product-action';
 
 const AddToCart = styled.img`
   position: absolute;
@@ -95,13 +94,13 @@ const Price = styled.p`
 class CategoryItem extends Component {
 
   render() {
-    const {product, selectedCurrency, addProduct, addProductByID, currencyIndex} = this.props;
+    const {product, selectedCurrency, addProduct, currencyIndex} = this.props;
         
     return (
       <ProductContainer inStock={product.inStock ? null :"0.5"} cursor={product.inStock ? "pointer" : "default"}>
       { product.inStock 
         ? <InStock> 
-          <Link to={`/product/${product.id}`} onClick={() => {addProductByID(product.id)}}>
+          <Link to={`/product/${product.id}`}>
             <Image src={product.gallery[0]} alt={product.name}/> 
           </Link>
           <AddToCart src={AddCart} alt="cart" onClick={() => addProduct(product) }/>
@@ -122,12 +121,10 @@ class CategoryItem extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
   addProduct: product => dispatch(addProduct(product)),
-  addProductByID: productID => dispatch(addProductByID(productID))
 });
 
 const mapStateToProps = (state) => ({
   currencyIndex: state.currencySwitcher.currencyIndex,
-  productID: state.product.productID
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CategoryItem);

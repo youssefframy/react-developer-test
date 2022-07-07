@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 import { gql } from 'apollo-boost';
-import Product from '../components/Product';
-
-import { connect } from 'react-redux';
+import Product from '../components/Product-item';
 
 
 const GET_CATEGORIES = gql`
@@ -38,7 +36,7 @@ const GET_CATEGORIES = gql`
 
 class ProductQuery extends Component {
     render() {
-      const { id } = this.props; 
+      const { id } = this.props;
 
       return (
         <Query 
@@ -56,8 +54,4 @@ class ProductQuery extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    id: state.product.productID
-});
-
-export default connect(mapStateToProps)(ProductQuery);
+export default ProductQuery;

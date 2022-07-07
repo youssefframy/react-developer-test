@@ -5,6 +5,8 @@ import CheckoutAttributes from './Checkout-attributes';
 import { addProduct } from '../redux/cart/cart-action';
 import { connect } from 'react-redux';
 
+
+
 const ProductContainer = styled.div`
   display: flex;
 `
@@ -46,6 +48,7 @@ const ImageBox = styled.div`
   display: flex;
   flex-direction: column;
   height: 511px;
+  margin-right: 3rem;
 
   img{
     width: 80px;
@@ -86,21 +89,35 @@ const AddToCart = styled.button`
 `
 
 class Product extends Component {
-  render() {
-    const { product, currencyIndex, addProduct } = this.props;
+  constructor() {
+    super();
 
+    this.state = {
+      currentImageIndex : 0
+    }
+  }
+
+
+  render() {
+    const { product, currencyIndex, addProduct } = this.props; 
+    const { currentImageIndex } = this.state
+    
     return (
       <ProductContainer>
           <ImageBox>
             {
               product.gallery.length === 1 ? null
               : product.gallery.map(img =>(
-                <img src={img} alt={product.name} key={img}/>
+                <img src={img} alt={product.name} key={img}
+                onClick={() => {
+                  this.setState({currentImageIndex: product.gallery.indexOf(img)})
+                }}
+                />
               ))
             }
           </ImageBox>
         <ImageContainer>
-          <img src={product.gallery[0]} alt={product.name}/>
+          <img src={product.gallery[currentImageIndex]} alt={product.name}/>
         </ImageContainer>
         <DescriptionContainer>
           <h1>{product.brand}</h1>
