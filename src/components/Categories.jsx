@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import styled from 'styled-components';
 import CategoryItem from './Category-item';
 
-
-
 const Container = styled.div`
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: row;
+    justify-content: space-around;
     flex-wrap: wrap;
 `
 class Categories extends Component {
@@ -26,10 +23,5 @@ class Categories extends Component {
   }
 }
 
-const mapStateToProps = state => ({ 
-  currency: state.currencySwitcher.currency
-})
-  
 
-
-export default connect(mapStateToProps)(Categories);
+export default Categories;

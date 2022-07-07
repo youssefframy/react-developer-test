@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 import { gql } from 'apollo-boost';
-import Categories from '../components/Categories';
+import Product from '../components/Product';
 
 import { connect } from 'react-redux';
 
@@ -36,8 +36,7 @@ const GET_CATEGORIES = gql`
 
 class ProductQuery extends Component {
     render() {
-      const { id } = this.props;
-      console.log(id)  
+      const { id } = this.props; 
 
       return (
         <Query 
@@ -47,7 +46,7 @@ class ProductQuery extends Component {
             {
                 ({loading, data}) => {
                     if (loading) return <h1>Loading...</h1>;
-                    console.log(data)
+                    return <Product product={data.product}/>
                 }
             }
         </Query>

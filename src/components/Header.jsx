@@ -25,7 +25,7 @@ const Wrapper = styled.div`
 const Left = styled.ul`   
   flex: 2;
   text-align: flex-start;
-  padding-left: 2vw;
+  padding-left: 3vw;
   align-items: center;
   text-decoration: none;
   list-style-type: none;
