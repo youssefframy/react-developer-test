@@ -8,12 +8,11 @@ const ValuesContainer = styled.div`
   justify-content: flex-start;
 `
 
-const Title = styled.p`
-    margin-top: -5px;
+const Title = styled.h3`
     font-size: 1.1rem;
     font-weight: bold;
     text-transform: uppercase;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.6rem;
 `
 
 const Value = styled.p`

@@ -17,15 +17,17 @@ const GET_CATEGORIES = gql`
             gallery
             description
             category
-                attributes{
-            name
-            type
+            attributes{
+                id
+                name
+                type
             items{
                 displayValue
                 value
             }
             }
             prices{
+            amount
             currency{
                 symbol
             }
@@ -46,7 +48,7 @@ class ProductQuery extends Component {
             {
                 ({loading, data}) => {
                     if (loading) return <h1>Loading...</h1>;
-                    return <Product product={data.product}/>
+                    return <Product key={data.product.id} product={data.product}/>
                 }
             }
         </Query>
