@@ -11,7 +11,7 @@ const Container = styled.div`
 class PDP extends Component {
   render() {
     const { history } = this.props;
-    let id = history.location.pathname.slice(9);
+    const id = history.location.pathname.slice(9);
 
     return (
       <Container>

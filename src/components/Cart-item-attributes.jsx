@@ -22,6 +22,8 @@ const Value = styled.p`
   justify-content: center;
   margin-right: 8px;
   width: 63px;
+  height: 22px;
+  font-size: 16px;
 `
 
 

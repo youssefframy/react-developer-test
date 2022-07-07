@@ -19,31 +19,63 @@ const Value = styled.p`
   display: flex;
   text-align: center;
   justify-content: center;
+  font-family: 'Source Sans Pro';
   cursor : pointer;
   padding: 5px;
   border: 1px solid #1D1F22;
+  color: ${props => props.Color};;
+  background-color: ${props => props.Background};
   margin-right: 8px;
-  width: 45px;
-  height: 30px;
-  font-size: 20px;
-  border-radius: 2px;
+  width: 40px;
+  height: 18px;
+  font-size: 18px;
+  transition: all 0.2s;
+
+  &:focus{
+    outline: none;
+  }
+
+  &:hover{
+    color: #FFFFFF;
+    background: #1D1F22;
+  }
+`
+
+const ColorContainer = styled.div`
+  width: 33px;
+  height: 33px;
+  margin-top: 1rem;
+  margin-right: 5px;
+  border: 1px solid ${props => props.BorderColor};
+  position: relative;
 `
 
   const ColorSwatch = styled.div`
   cursor : pointer;
   width: 30px;
   height: 30px;
-  margin-top: 1rem;
-  border: 1px solid #1D1F22;
+  border: 1px solid #d0cfcf;
   background: ${props => props.Color};
   margin-right: 8px;
-  border-radius: 2px;
+  position: absolute;
+  padding-left: 1px;
+  padding-bottom: 1px;
 `
 
 
-class CheckoutAttributes extends Component {
+class Attributes extends Component {
+  constructor(){
+    super()
+
+    this.state = {
+      currentAttribute: ""
+    }
+  }
+
+
   render() {
     const { attribute } = this.props;
+    const { currentAttribute } = this.state;
 
     return (
       <div>
@@ -52,7 +84,11 @@ class CheckoutAttributes extends Component {
                 <Title>{`${attribute.id}:`}</Title>
                 <ValuesContainer>
                     {attribute.items.map(item => (
-                        <Value key={item.id}>
+                        <Value key={item.id} 
+                          onClick={() => this.setState({currentAttribute: item.value})} 
+                          Color = {currentAttribute === item.value ? "#FFFFFF" : "#1D1F22"}
+                          Background = {currentAttribute === item.value ? "#1D1F22" : "#FFFFFF"}
+                        >
                             {item.value}
                         </Value>
                     ))}
@@ -66,7 +102,11 @@ class CheckoutAttributes extends Component {
                 <Title>{`${attribute.id}:`}</Title>
                 <ValuesContainer>
                     {attribute.items.map(item => (
-                        <ColorSwatch key={item.id} Color = {item.value}/>
+                      <ColorContainer  BorderColor = {currentAttribute === item.value ? "#5ECE7B" : "transparent"}>
+                      <ColorSwatch key={item.id} Color = {item.value}
+                        onClick={() => this.setState({currentAttribute: item.value})} 
+                      />
+                      </ColorContainer>
                     ))}
                 </ValuesContainer>
               </div>
@@ -77,4 +117,4 @@ class CheckoutAttributes extends Component {
   }
 }
 
-export default CheckoutAttributes;
+export default Attributes;

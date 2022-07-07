@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import CheckoutAttributes from './Checkout-attributes';
+import CartAttributes from './Cart-item-attributes';
 
 import {addProduct, removeItem} from '../redux/cart/cart-action';
 import { connect } from 'react-redux';
@@ -109,7 +109,6 @@ const Quantity = styled.div`
   font-weight: 500;
 `
 
-
 class CheckoutItem extends Component {
   constructor(props){
     super(props);
@@ -134,10 +133,10 @@ class CheckoutItem extends Component {
       <DescriptionContainer>
         <p>{item.brand} {item.name}</p>
         <Price>{item.prices[currencyIndex].currency.symbol}{item.prices[currencyIndex].amount}</Price>
-        {item.attributes.map(attribute => (
-            <CheckoutAttributes key={attribute.id} attribute = {attribute}/>
-          ))
-        }
+          {item.attributes.map(attribute => (
+              <CartAttributes key={attribute.id} attribute = {attribute}/>
+            ))
+          }
         </DescriptionContainer>
         <ButtonsContainer>
             <Button onClick = {() => addItem(item)}>

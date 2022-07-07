@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import styled from "styled-components";
-import CheckoutAttributes from './Checkout-attributes';
+import Attributes from './Attributes';
 
 import { addProduct } from '../redux/cart/cart-action';
 import { connect } from 'react-redux';
-
 
 
 const ProductContainer = styled.div`
@@ -24,12 +23,6 @@ const DescriptionContainer = styled.div`
 
   h2{
     font-size: 30px;
-    font-weight: 400;
-    line-height: 27px;
-  }
-
-  p {
-    font-size: 16px;
     font-weight: 400;
     line-height: 27px;
   }
@@ -93,14 +86,14 @@ class Product extends Component {
     super();
 
     this.state = {
-      currentImageIndex : 0
+      currentImageIndex : 0,
     }
   }
 
 
   render() {
     const { product, currencyIndex, addProduct } = this.props; 
-    const { currentImageIndex } = this.state
+    const { currentImageIndex } = this.state;
     
     return (
       <ProductContainer>
@@ -123,7 +116,7 @@ class Product extends Component {
           <h1>{product.brand}</h1>
           <h2>{product.name}</h2>
           {product.attributes.map(attribute => (
-            <CheckoutAttributes key={attribute.id} attribute={attribute}/>
+            <Attributes key={attribute.id} attribute={attribute}/>
             ))
           }
           <h3>PRICE:</h3>
