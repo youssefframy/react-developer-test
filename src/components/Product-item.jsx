@@ -97,6 +97,22 @@ const AddToCart = styled.button`
   }
 `
 
+const OutStock = styled.div`
+  cursor: default;
+  opacity: 0.5;
+
+  p{
+    position: absolute;
+    color: #8D8F9A;
+    left: 25.42%;
+    right: 25.71%;
+    top: 45%;
+    bottom: 43.94%;
+    font-weight: 400;
+    font-size: 1.5rem;
+  }
+`
+
 class Product extends Component {
   constructor(props) {
     super(props);
@@ -135,6 +151,9 @@ class Product extends Component {
   render() {
     const { product, currencyIndex, addProduct } = this.props; 
     const { currentImageIndex, attributes, attributeIndex } = this.state;
+    console.log(attributes.length)
+    console.log(product.attributes.length)
+
     return (
       <ProductContainer>
           <ImageBox>
@@ -150,7 +169,11 @@ class Product extends Component {
             }
           </ImageBox>
         <ImageContainer>
-          <img src={product.gallery[currentImageIndex]} alt={product.name}/>
+          {
+            product.inStock 
+            ? <img src={product.gallery[currentImageIndex]} alt={product.name}/>
+            : <OutStock> <p>OUT OF STOCK</p> <img src={product.gallery[currentImageIndex]} alt=""/> </OutStock>
+          }
         </ImageContainer>
         <DescriptionContainer>
           <h1>{product.brand}</h1>
@@ -161,7 +184,17 @@ class Product extends Component {
           }
           <h3>PRICE:</h3>
           <Price>{product.prices[currencyIndex].currency.symbol}{product.prices[currencyIndex].amount}</Price>
-          <AddToCart onClick={() => addProduct(product, attributes)}>ADD TO CART</AddToCart>
+          {product.inStock 
+            ?<AddToCart onClick={() => {
+              if(attributes.length === 1){
+                return <p>You Must Select Attributes</p>
+              } else if (attributes.length === product.attributes.length + 1) {
+                addProduct(product, attributes)
+              }
+            }}>
+              ADD TO CART</AddToCart>
+            :<AddToCart>OUT OF STOCK</AddToCart>
+          }
           <span dangerouslySetInnerHTML={{ __html: product.description}}/>
         </DescriptionContainer>
       </ProductContainer>

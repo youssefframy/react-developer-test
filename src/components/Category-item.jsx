@@ -110,8 +110,9 @@ class CategoryItem extends Component {
             }
           /> 
           </InStock>
-
-        : <OutStock> <p>OUT OF STOCK</p><Image src={product.gallery[0]} alt={product.name}/> </OutStock>
+         : <Link to={`/product/${product.id}`}>
+          <OutStock> <p>OUT OF STOCK</p><Image src={product.gallery[0]} alt={product.name}/> </OutStock>
+          </Link>
       }
           <DescriptionContainer>
             <Link to={`/product/${product.id}`}>
