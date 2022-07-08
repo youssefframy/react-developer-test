@@ -4,13 +4,11 @@ export const addItemToCart = (cartItems, cartItemToAdd, attributes) => {
             return (cartItem.id === cartItemToAdd.id && cartItem.selectedAttributes === attributes)
         }
     );
-     
-    const randomNumber = Math.floor(Math.random() * 100);
-
+    
     if(existingCartItems){
         return cartItems.map(
                 cartItem => cartItem.id === cartItemToAdd.id
-                ? { ...cartItem, id:cartItem.id+randomNumber , quantity: cartItem.quantity +1, selectedAttributes: attributes}
+                ? { ...cartItem, quantity: cartItem.quantity +1, selectedAttributes: attributes}
                 : cartItem
             )
     }

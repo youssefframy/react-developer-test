@@ -132,7 +132,7 @@ class CartDropdown extends Component {
     cartItems.forEach((item) => {
       totalAmount += item.prices[currencyIndex].amount * item.quantity;
     });
-    
+       
     return (
       <DropdownContainer>
         <TitleContainer>

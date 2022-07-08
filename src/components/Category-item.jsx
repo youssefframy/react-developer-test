@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import AddCart from "../assets/addCart.svg";
 
-import { Link } from 'react-router-dom';
-import {connect} from 'react-redux';
+import { withRouter, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { addProduct } from '../redux/cart/cart-action';
 
 const AddToCart = styled.img`
@@ -94,7 +94,7 @@ const Price = styled.p`
 class CategoryItem extends Component {
 
   render() {
-    const {product, selectedCurrency, addProduct, currencyIndex} = this.props;
+    const {product, selectedCurrency, addProduct, currencyIndex, history} = this.props;
         
     return (
       <ProductContainer inStock={product.inStock ? null :"0.5"} cursor={product.inStock ? "pointer" : "default"}>
@@ -103,7 +103,12 @@ class CategoryItem extends Component {
           <Link to={`/product/${product.id}`}>
             <Image src={product.gallery[0]} alt={product.name}/> 
           </Link>
-          <AddToCart src={AddCart} alt="cart" onClick={() => addProduct(product) }/>
+          <AddToCart src={AddCart} alt="cart" onClick={() => {
+                if (product.attributes.length ===0) {return addProduct(product)};
+                return history.push(`/product/${product.id}`);
+              }
+            }
+          /> 
           </InStock>
 
         : <OutStock> <p>OUT OF STOCK</p><Image src={product.gallery[0]} alt={product.name}/> </OutStock>
@@ -127,4 +132,4 @@ const mapStateToProps = (state) => ({
   currencyIndex: state.currencySwitcher.currencyIndex,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CategoryItem);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CategoryItem))
