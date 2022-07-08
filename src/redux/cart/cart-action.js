@@ -4,11 +4,6 @@ export const toggleCartHidden = () => ({
     type: CartActionTypes.TOGGLE_CART_HIDDEN
 });
 
-export const addCartAttribute = attribute => ({ 
-    type: CartActionTypes.ADD_CART_ATTRIBUTE,
-    payload: attribute
-});
-
 export const addProduct = product => ({
     type: CartActionTypes.ADD_PRODUCT,
     payload: product

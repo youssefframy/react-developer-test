@@ -55,7 +55,12 @@ const Label = styled.li`
   padding: 1rem;
   text-align: center;
   cursor: pointer;
-  transition: all 0.4s;
+  transition: all 0.2s;
+
+  &:hover{
+    color: #5ECE7B;
+    border-bottom: 2px solid #5ECE7B;
+  }
 
   &.active{
     color: #5ECE7B;

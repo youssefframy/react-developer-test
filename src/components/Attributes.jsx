@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
+import { connect } from 'react-redux';
+
+
 const ValuesContainer = styled.div`
   display: flex;
   margin-top: -1rem;
@@ -28,7 +31,7 @@ const Value = styled.p`
   margin-right: 8px;
   width: 40px;
   height: 18px;
-  font-size: 18px;
+  font-size: 16px;
   transition: all 0.2s;
 
   &:focus{
@@ -46,8 +49,13 @@ const ColorContainer = styled.div`
   height: 33px;
   margin-top: 1rem;
   margin-right: 5px;
-  border: 1px solid ${props => props.BorderColor};
+  border: 2px solid ${props => props.BorderColor};
   position: relative;
+  transition: all 0.2s;
+
+  &:hover {
+    border: 2px solid #5ECE7B;
+  }
 `
 
   const ColorSwatch = styled.div`
@@ -62,21 +70,16 @@ const ColorContainer = styled.div`
   padding-bottom: 1px;
 `
 
-
 class Attributes extends Component {
-  constructor(){
-    super()
-
-    this.state = {
-      currentAttribute: ""
-    }
-  }
-
-
   render() {
-    const { attribute } = this.props;
-    const { currentAttribute } = this.state;
-
+    const { attribute, attributeState} = this.props;
+    let currentIndex = 0
+    attributeState.map(currentAttribute => {
+      if(currentAttribute.name === attribute.id){
+          currentIndex = attributeState.indexOf(currentAttribute)
+          }
+            return currentIndex
+    })
     return (
       <div>
         {attribute.type === "text"
@@ -84,11 +87,18 @@ class Attributes extends Component {
                 <Title>{`${attribute.id}:`}</Title>
                 <ValuesContainer>
                     {attribute.items.map(item => (
-                        <Value key={item.id} 
-                          onClick={() => this.setState({currentAttribute: item.value})} 
-                          Color = {currentAttribute === item.value ? "#FFFFFF" : "#1D1F22"}
-                          Background = {currentAttribute === item.value ? "#1D1F22" : "#FFFFFF"}
-                        >
+                      <Value key={item.id} 
+                      onClick={() => {
+                        this.props.updateSelectedOptions({
+                          name: attribute.id,
+                          value: item.value,
+                        })
+                      }
+                    }
+                    Color = {item.value === attributeState[currentIndex].value ? "#FFFFFF" : "#1D1F22"
+                  }
+                    Background = {item.value === attributeState[currentIndex].value ? "#1D1F22" : "#FFFFFF"}
+                    >
                             {item.value}
                         </Value>
                     ))}
@@ -102,9 +112,14 @@ class Attributes extends Component {
                 <Title>{`${attribute.id}:`}</Title>
                 <ValuesContainer>
                     {attribute.items.map(item => (
-                      <ColorContainer  BorderColor = {currentAttribute === item.value ? "#5ECE7B" : "transparent"}>
+                      <ColorContainer  BorderColor = {attributeState[currentIndex].value === item.value ? "#5ECE7B" : "transparent"}>
                       <ColorSwatch key={item.id} Color = {item.value}
-                        onClick={() => this.setState({currentAttribute: item.value})} 
+                        onClick={() =>{
+                          this.props.updateSelectedOptions({
+                            name: attribute.id,
+                            value: item.value,
+                          })
+                        }}
                       />
                       </ColorContainer>
                     ))}
@@ -117,4 +132,8 @@ class Attributes extends Component {
   }
 }
 
-export default Attributes;
+const mapStateToProps = (state) => ({
+  selectedAttributes: state.cart.selectedAttributes
+});
+
+export default connect(mapStateToProps)(Attributes);

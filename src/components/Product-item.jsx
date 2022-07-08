@@ -40,9 +40,25 @@ const ImageContainer = styled.div`
 const ImageBox = styled.div`
   display: flex;
   flex-direction: column;
+  margin-right: 2rem;
   height: 511px;
-  margin-right: 3rem;
+  width: 100px;
+  overflow: auto;
+  ::-webkit-scrollbar {
+    width: 0.18rem;
+  }
 
+  ::-webkit-scrollbar-track{
+  background: #e6e6e6;
+  border-radius: 100vw;
+  margin-block: .5rem;
+  }
+
+  ::-webkit-scrollbar-thumb{
+  background: linear-gradient(to top, #56bb71, #5ECE7B, #e6e6e6,#FFFFFF);
+  border-radius: 100vw;
+  }
+  
   img{
     width: 80px;
     height: 80px;
@@ -82,19 +98,44 @@ const AddToCart = styled.button`
 `
 
 class Product extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
+      attributes: [{
+        name: "",
+        value:""
+      }],
+      attributeIndex: 0,
       currentImageIndex : 0,
     }
+    this.updateOptions = this.updateOptions.bind(this);
   }
 
+  updateOptions(props) {
+    const addedAttr = this.state.attributes.find(
+      (item) => item.name === props.name
+    );
 
+    let attributes = [...this.state.attributes];
+    let index = attributes.findIndex((attr) => attr.name === props.name);
+    this.setState({attributeIndex: index})
+    attributes[index] = {
+      ...attributes[index],
+      value: props.value,
+    };
+
+    addedAttr
+      ? this.setState({ attributes })
+      : this.setState((prevState) => ({
+          attributes: [...prevState.attributes, props],
+        }));
+  }
+  
   render() {
     const { product, currencyIndex, addProduct } = this.props; 
-    const { currentImageIndex } = this.state;
-    
+    const { currentImageIndex, attributes, attributeIndex } = this.state;
+    console.log(this.state.attributes)
     return (
       <ProductContainer>
           <ImageBox>
@@ -116,7 +157,7 @@ class Product extends Component {
           <h1>{product.brand}</h1>
           <h2>{product.name}</h2>
           {product.attributes.map(attribute => (
-            <Attributes key={attribute.id} attribute={attribute}/>
+            <Attributes key={attribute.id} attribute={attribute} attributeState={attributes} updateSelectedOptions={this.updateOptions} attributeIndex = {attributeIndex}/>
             ))
           }
           <h3>PRICE:</h3>
@@ -130,7 +171,7 @@ class Product extends Component {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  addProduct: product => dispatch(addProduct(product))
+  addProduct: product => dispatch(addProduct(product)),
 });
 
 const mapStateToProps = (state) => ({
