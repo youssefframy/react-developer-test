@@ -142,9 +142,10 @@ class CartDropdown extends Component {
         <CartItemsContainer>
           {
             cartItems.length ?
-            cartItems.map(cartItem => (
-              <CartItem key={cartItem.id} item={cartItem}/>
-            ))
+            
+            cartItems.map(cartItem => {
+              return <CartItem  item={cartItem} key={cartItem.id}/>
+            })
             : <EmptyMessage>Your Cart is Empty</EmptyMessage>
           }
         </CartItemsContainer>

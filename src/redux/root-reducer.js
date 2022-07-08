@@ -9,7 +9,7 @@ import categoryReducer from './category/category-reducer';
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['cart', 'currency']
+    whitelist: ['cart', 'currency', 'category']
 }
 
 const appReducer = combineReducers({

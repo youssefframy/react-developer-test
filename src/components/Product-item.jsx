@@ -135,8 +135,6 @@ class Product extends Component {
   render() {
     const { product, currencyIndex, addProduct } = this.props; 
     const { currentImageIndex, attributes, attributeIndex } = this.state;
-    
-    console.log(this.state.attributes)
     return (
       <ProductContainer>
           <ImageBox>

@@ -26,16 +26,16 @@ const Value = styled.p`
   background-color: ${props => props.Background};
 `
 const ColorContainer = styled.div`
-  width: 19px;
-  height: 19px;
-  margin-top: 10px;
+  width: 22px;
+  height: 22px;
+  margin-top: 8px;
   margin-right: 5px;
   border: 2px solid ${props => props.BorderColor};
 `
 
 const ColorSwatch = styled.div`
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   border: 1px solid #1D1F22;
   background: ${props => props.Color};
   margin-right: 8px;
