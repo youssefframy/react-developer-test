@@ -120,6 +120,7 @@ class CheckoutItem extends Component {
 
   render() {
     const { item, addItem, removeItem, currencyIndex } = this.props;
+    const selectedAttributes = item.selectedAttributes;
 
     const ImageSlider = (newIndex, sign) => {
       if (sign === '+') this.setState({ index: this.state.index + 1});
@@ -134,7 +135,7 @@ class CheckoutItem extends Component {
         <p>{item.brand} {item.name}</p>
         <Price>{item.prices[currencyIndex].currency.symbol}{item.prices[currencyIndex].amount}</Price>
           {item.attributes.map(attribute => (
-              <CartAttributes key={attribute.id} attribute = {attribute}/>
+              <CartAttributes key={attribute.id} attribute = {attribute} selectedAttributes={selectedAttributes}/>
             ))
           }
         </DescriptionContainer>

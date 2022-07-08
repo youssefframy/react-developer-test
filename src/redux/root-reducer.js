@@ -12,10 +12,10 @@ const persistConfig = {
     whitelist: ['cart', 'currency']
 }
 
-const rootReducer = combineReducers({
+const appReducer = combineReducers({
     cart: cartReducer,
     currencySwitcher: currencyReducer,
     category: categoryReducer,
-});
+})
 
-export default persistReducer(persistConfig, rootReducer);
+export default persistReducer(persistConfig, appReducer);

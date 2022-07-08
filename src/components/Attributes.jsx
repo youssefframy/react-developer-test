@@ -95,8 +95,7 @@ class Attributes extends Component {
                         })
                       }
                     }
-                    Color = {item.value === attributeState[currentIndex].value ? "#FFFFFF" : "#1D1F22"
-                  }
+                    Color = {item.value === attributeState[currentIndex].value ? "#FFFFFF" : "#1D1F22"}
                     Background = {item.value === attributeState[currentIndex].value ? "#1D1F22" : "#FFFFFF"}
                     >
                             {item.value}

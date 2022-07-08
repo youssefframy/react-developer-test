@@ -73,15 +73,14 @@ const Quantity = styled.div`
 class CartItem extends Component {
   render() {
     const { item, addItem, removeItem, currencyIndex } = this.props;
-
+    const selectedAttributes = item.selectedAttributes;
     return (
-      
       <ItemContainer>
       <DescriptionContainer>
         <p>{item.brand} {item.name}</p>
         <Price>{item.prices[currencyIndex].currency.symbol}{item.prices[currencyIndex].amount}</Price>
         {item.attributes.map(attribute => (
-            <CartAttributes key={attribute.id} attribute = {attribute}/>
+            <CartAttributes key={attribute.id} attribute={attribute} selectedAttributes={selectedAttributes}/>
           ))
         }
         </DescriptionContainer>

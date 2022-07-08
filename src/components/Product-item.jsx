@@ -135,6 +135,7 @@ class Product extends Component {
   render() {
     const { product, currencyIndex, addProduct } = this.props; 
     const { currentImageIndex, attributes, attributeIndex } = this.state;
+    
     console.log(this.state.attributes)
     return (
       <ProductContainer>
@@ -162,7 +163,7 @@ class Product extends Component {
           }
           <h3>PRICE:</h3>
           <Price>{product.prices[currencyIndex].currency.symbol}{product.prices[currencyIndex].amount}</Price>
-          <AddToCart onClick={() => addProduct(product)}>ADD TO CART</AddToCart>
+          <AddToCart onClick={() => addProduct(product, attributes)}>ADD TO CART</AddToCart>
           <span dangerouslySetInnerHTML={{ __html: product.description}}/>
         </DescriptionContainer>
       </ProductContainer>
@@ -171,7 +172,7 @@ class Product extends Component {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  addProduct: product => dispatch(addProduct(product)),
+  addProduct: (product, attributes) => dispatch(addProduct(product, attributes)),
 });
 
 const mapStateToProps = (state) => ({
