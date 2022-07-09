@@ -74,7 +74,8 @@ class CartItem extends Component {
   render() {
     const { item, addItem, removeItem, currencyIndex } = this.props;
     const selectedAttributes = item.selectedAttributes;
-    console.log(selectedAttributes)
+    console.log(item.id)
+
     return (
       <ItemContainer>
       <DescriptionContainer>
@@ -86,7 +87,7 @@ class CartItem extends Component {
         }
         </DescriptionContainer>
         <ButtonsContainer>
-            <Button onClick = {() => addItem(item)}>
+            <Button onClick = {() => addItem(item ,selectedAttributes, item.id)}>
               ＋
             </Button>
             <Quantity>
@@ -101,7 +102,7 @@ class CartItem extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  addItem: item => dispatch(addProduct(item)),
+  addItem: (item, selectedAttributes) => dispatch(addProduct(item, selectedAttributes, item.id)),
   removeItem: item => dispatch(removeItem(item))
 });
 

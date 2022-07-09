@@ -140,7 +140,7 @@ class CheckoutItem extends Component {
           }
         </DescriptionContainer>
         <ButtonsContainer>
-            <Button onClick = {() => addItem(item)}>
+            <Button onClick = {() => addItem(item, selectedAttributes, item.id)}>
               ＋
             </Button>
             <Quantity>{item.quantity}
@@ -173,7 +173,7 @@ class CheckoutItem extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  addItem: item => dispatch(addProduct(item)),
+  addItem: (item, selectedAttributes) => dispatch(addProduct(item, selectedAttributes, item.id)),
   removeItem: item => dispatch(removeItem(item))
 });
 

@@ -125,10 +125,10 @@ class Product extends Component {
       attributeIndex: 0,
       currentImageIndex : 0,
     }
-    this.updateOptions = this.updateOptions.bind(this);
+    this.updateAttributes = this.updateAttributes.bind(this);
   }
 
-  updateOptions(props) {
+  updateAttributes(props) {
     const addedAttr = this.state.attributes.find(
       (item) => item.name === props.name
     );
@@ -151,8 +151,9 @@ class Product extends Component {
   render() {
     const { product, currencyIndex, addProduct } = this.props; 
     const { currentImageIndex, attributes, attributeIndex } = this.state;
-    console.log(attributes.length)
-    console.log(product.attributes.length)
+    const arrayId = attributes.map((attr) => attr.name + attr.value);
+    const sortedArray = arrayId.sort().toString();
+    const newProductId = product.id + sortedArray;
 
     return (
       <ProductContainer>
@@ -179,7 +180,7 @@ class Product extends Component {
           <h1>{product.brand}</h1>
           <h2>{product.name}</h2>
           {product.attributes.map(attribute => (
-            <Attributes key={attribute.id} attribute={attribute} attributeState={attributes} updateSelectedOptions={this.updateOptions} attributeIndex = {attributeIndex}/>
+            <Attributes key={attribute.id} attribute={attribute} attributeState={attributes} updateSelectedOptions={this.updateAttributes} attributeIndex = {attributeIndex}/>
             ))
           }
           <h3>PRICE:</h3>
@@ -187,9 +188,9 @@ class Product extends Component {
           {product.inStock 
             ?<AddToCart onClick={() => {
               if(attributes.length === 1){
-                return <p>You Must Select Attributes</p>
+                return null
               } else if (attributes.length === product.attributes.length + 1) {
-                addProduct(product, attributes)
+                addProduct(product, attributes, newProductId)
               }
             }}>
               ADD TO CART</AddToCart>
@@ -203,7 +204,7 @@ class Product extends Component {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  addProduct: (product, attributes) => dispatch(addProduct(product, attributes)),
+  addProduct: (product, attributes, newProductId) => dispatch(addProduct(product, attributes, newProductId)),
 });
 
 const mapStateToProps = (state) => ({
