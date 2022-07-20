@@ -3,8 +3,6 @@ import { Query } from 'react-apollo';
 import { gql } from 'apollo-boost';
 import Categories from '../components/Categories';
 
-import { connect } from 'react-redux';
-
 
 const GET_PRODUCTS_BY_CATEGORY = gql`
     query category($title: String!)
@@ -59,8 +57,5 @@ class CategoriesQuery extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    title: state.category.categoryTitle
-});
 
-export default connect(mapStateToProps)(CategoriesQuery);
+export default CategoriesQuery;

@@ -16,6 +16,6 @@ const appReducer = combineReducers({
     cart: cartReducer,
     currencySwitcher: currencyReducer,
     category: categoryReducer,
-})
+});
 
 export default persistReducer(persistConfig, appReducer);

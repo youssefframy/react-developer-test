@@ -18,14 +18,11 @@ const Label = styled.p`
   text-align: center;
   cursor: pointer;
   transition: all 0.2s;
+  color: ${props => props.activeColor};
+  border-bottom: 2px solid ${props => props.activeBorder};
 
   &:hover{
     color: #5ECE7B;
-  }
-
-  &.active{
-    color: #5ECE7B;
-    border-bottom: 2px solid #5ECE7B;
   }
 
 `
@@ -41,14 +38,20 @@ const StyledLink = styled(Link)`
 
 class CategoryNames extends Component {
   render() {
-    const { data, changeCategory } = this.props;
+    const { data, changeCategory, title } = this.props;
 
     return (
       <div>
         {
             data.map((category) => 
                 <StyledLink to={`/listing/${category.name}`}>
-                    <Label onClick={() => changeCategory(category.name)}>{category.name}</Label>
+                    <Label 
+                      activeColor={title === category.name ? "#5ECE7B" : "#1D1F22"}
+                      activeBorder={title === category.name ? "#5ECE7B" : "transparent"}
+                      onClick={() => changeCategory(category.name)}
+                    >
+                    {category.name}
+                    </Label>
                 </StyledLink>
             )
         }
@@ -58,7 +61,11 @@ class CategoryNames extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    changeCategory: (category) => dispatch(changeCategory(category)),
+  changeCategory: (category) => dispatch(changeCategory(category)),
 });
 
-export default connect(null, mapDispatchToProps)(CategoryNames);
+const mapStateToProps = (state) => ({
+  title : state.category.categoryTitle
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryNames);
