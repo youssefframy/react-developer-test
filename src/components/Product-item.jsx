@@ -113,6 +113,10 @@ const OutStock = styled.div`
     font-size: 1.5rem;
   }
 `
+const Warning = styled.p`
+  color: #D0342C;
+  padding-top: 10px;
+`
 
 class Product extends Component {
   constructor(props) {
@@ -125,6 +129,7 @@ class Product extends Component {
       }],
       attributeIndex: 0,
       currentImageIndex : 0,
+      selectedAllAttributes: true,
     }
     this.updateAttributes = this.updateAttributes.bind(this);
   }
@@ -151,7 +156,7 @@ class Product extends Component {
   
   render() {
     const { product, currencyIndex, addProduct } = this.props; 
-    const { currentImageIndex, attributes, attributeIndex } = this.state;
+    const { currentImageIndex, attributes, attributeIndex, selectedAllAttributes } = this.state;
     const arrayId = attributes.map((attr) => attr.name + attr.value);
     const sortedArray = arrayId.sort().toString();
     const newProductId = product.id + sortedArray;
@@ -186,12 +191,14 @@ class Product extends Component {
           }
           <h3>PRICE:</h3>
           <Price>{product.prices[currencyIndex].currency.symbol}{product.prices[currencyIndex].amount}</Price>
+          {selectedAllAttributes ? null : <Warning>* Please Select All Attributes.</Warning>}
           {product.inStock 
             ?<AddToCart onClick={() => {
               if(attributes.length === 1){
-                return <p>test</p>
+                this.setState({ selectedAllAttributes: false })
               } else if (attributes.length === product.attributes.length + 1) {
-                addProduct(product, attributes, newProductId)
+                this.setState({ selectedAllAttributes: true });
+                addProduct(product, attributes, newProductId);
               }
             }}>
               ADD TO CART</AddToCart>
