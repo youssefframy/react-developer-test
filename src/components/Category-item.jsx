@@ -23,6 +23,8 @@ const Image = styled.img`
   height: 300px;
   justify-content: center;
   object-fit: contain;
+  opacity: ${props => props.inStock};
+
   &:hover{
     box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
   }
@@ -38,10 +40,9 @@ const ProductContainer = styled.div`
   margin-bottom: 5rem;
   transform: translateZ(0);
   transition: transform 0.25s ease-out;
-  opacity: ${props => props.inStock};
+  opacity: ${props => props.opacity};
   position: relative;
-  z-index: ${props => props.index};
-
+  
   &:hover{
     box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
     
@@ -73,6 +74,7 @@ const OutStock = styled.div`
 
 const DescriptionContainer= styled.div`
   width: 356px;
+  opacity: ${props => props.inStock};
 
   a{ 
     text-decoration: none;
@@ -98,11 +100,11 @@ class CategoryItem extends Component {
         
     return (
       <ProductContainer 
-        inStock={product.inStock ? null :"0.5"} cursor={product.inStock ? "pointer" : "default"}
-        index={cartHidden ? 0 : -1}
-        >
+        cursor={product.inStock ? "pointer" : "default"}
+        opacity={cartHidden ? 1 : 0.5}
+      >
       { product.inStock 
-        ? <InStock> 
+        ? <InStock > 
           <Link to={`/product/${product.id}`}>
             <Image src={product.gallery[0]} alt={product.name}/> 
           </Link>
@@ -114,12 +116,12 @@ class CategoryItem extends Component {
           /> 
           </InStock>
          : <Link to={`/product/${product.id}`}>
-          <OutStock> <p>OUT OF STOCK</p><Image src={product.gallery[0]} alt={product.name}/> </OutStock>
+          <OutStock> <p>OUT OF STOCK</p><Image inStock={product.inStock ? null :"0.5"}  src={product.gallery[0]} alt={product.name}/> </OutStock>
           </Link>
       }
-          <DescriptionContainer>
+          <DescriptionContainer inStock={product.inStock ? null :"0.5"}>
             <Link to={`/product/${product.id}`}>
-              <Description>{product.brand} {product.name}</Description>
+              <Description >{product.brand} {product.name}</Description>
             </Link>
             <Price>{`${selectedCurrency[currencyIndex].currency.symbol} ${selectedCurrency[currencyIndex].amount}`}</Price>
           </DescriptionContainer>

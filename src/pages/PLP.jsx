@@ -8,7 +8,6 @@ import { closeCartOverlay } from '../redux/cart/cart-action';
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  overflow: hidden;
   padding-right: 15px;
   padding-left: 15px;
   margin: auto;
@@ -17,6 +16,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   background: ${props => props.BackgroundColor};
+  position: ${props => props.scroll};
 `
 const Title = styled.div`
   margin-left: 3vw;
@@ -33,13 +33,14 @@ class PLP extends Component {
     const { title, cartHidden, closeCartOverlay } = this.props;
 
     return (
-        <Container 
-          BackgroundColor={cartHidden ? "transparent" : "rgba(57, 55, 72, 0.22)"}
-          onClick={() => cartHidden ? null : closeCartOverlay()}
-          >
-          <Title>{title}</Title>
-          <Categories/>
-        </Container>
+      <Container 
+        BackgroundColor={cartHidden ? "transparent" : "rgba(57, 55, 72, 0.22)"}
+        scroll={cartHidden ? "relative": "fixed"}
+        onClick={() => cartHidden ? null : closeCartOverlay()}
+      >
+        <Title>{title}</Title>
+        <Categories/>
+      </Container>
     )
   }
 }
