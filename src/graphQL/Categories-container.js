@@ -41,12 +41,12 @@ const GET_PRODUCTS_BY_CATEGORY = gql`
 
 class CategoriesQuery extends Component {
     render() {
-      const { title } = this.props;
+      const { id } = this.props;
 
       return (
         <Query 
             query={GET_PRODUCTS_BY_CATEGORY}
-            variables= {{title: title}}
+            variables= {{title: id}}
         >
             {
                 ({loading, data}) => {

@@ -4,6 +4,8 @@ import {default as Categories} from '../graphQL/Categories-container';
 
 import { connect } from 'react-redux';
 import { closeCartOverlay } from '../redux/cart/cart-action';
+import { withRouter } from 'react-router-dom';
+
 
 const Container = styled.div`
   width: 100%;
@@ -11,7 +13,7 @@ const Container = styled.div`
   padding-right: 15px;
   padding-left: 15px;
   margin: auto;
-  margin-top: 100px;
+  margin-top: 120px;
   max-width: 1380px;
   display: flex;
   flex-direction: column;
@@ -30,7 +32,8 @@ const Title = styled.div`
 
 class PLP extends Component {
   render() {
-    const { title, cartHidden, closeCartOverlay } = this.props;
+    const { title, cartHidden, closeCartOverlay, history } = this.props;
+    const id = history.location.pathname.slice(9);
 
     return (
       <Container 
@@ -39,7 +42,7 @@ class PLP extends Component {
         onClick={() => cartHidden ? null : closeCartOverlay()}
       >
         <Title>{title}</Title>
-        <Categories/>
+        <Categories id={id}/>
       </Container>
     )
   }
@@ -54,4 +57,4 @@ const mapDispatchToProps = dispatch => ({
   closeCartOverlay: () => dispatch(closeCartOverlay()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PLP);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PLP));

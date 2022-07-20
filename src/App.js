@@ -16,6 +16,7 @@ class App extends Component {
         <Header/>
         <Switch>
           <Route exact path = '/' component = {PLP} />
+          <Route path = '/listing/:categoryName' component = {PLP} />
           <Route path = '/product/:productID' component = {PDP} />
           <Route exact path = '/cart' component   = {CartPage} />
         </Switch>
