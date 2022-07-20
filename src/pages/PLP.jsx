@@ -7,13 +7,21 @@ import { connect } from 'react-redux';
 
 
 const Container = styled.div`
-  margin-inline: 3vw;
-  width: 95%;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin: auto;
+  margin-top: 160px;
+  max-width: 1380px;
+  display: flex;
+  flex-direction: column;
 `
 const Title = styled.div`
-  margin-bottom: 12vh;
+  margin-left: 3vw;
+  margin-bottom: 10vh;
   font-weight: 400;
   font-size: 42px;
+  position: relative;
   color: #1D1F22;
   text-transform: uppercase;
 `

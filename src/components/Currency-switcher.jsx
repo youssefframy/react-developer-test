@@ -5,24 +5,37 @@ import { connect } from 'react-redux';
 import { addCurrencies, changeCurrency } from '../redux/currency/currency-action';
 
 
-const Switcher = styled.div`
-    select{
-        background: transparent;
-        border: none;
-        outline: none;
-        scroll-behavior: smooth;
-        padding: 2px;
-        cursor: pointer;
-        font-size: 1rem;
-        text-align: center;
-        justify-content: center;
-        appearance: none;
-        border: 0;
+const SwitcherContainer = styled.div`
+    position: absolute;
+    width: 114px;
+    height: 169px;
+    top: 30px;
+    right: -60px;
+    box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+    z-index: 5;
 
-        &:focus{
-            outline: none;
-        }
+    ul {
+        position: relative;
+        text-decoration: none;
+        list-style-type: none;
+        margin-top: 0;
+        margin-left: -40px;
+    }
     
+    li {
+        /* border: 1px solid black; */
+        width: 114px;
+        font-weight: 400;
+        font-size: 17px;
+        line-height: 200%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:hover {
+            background: #EEEEEE; 
+        }
+
     }
 `
 
@@ -31,21 +44,23 @@ class CurrencySwitcher extends Component {
     const { data, addCurrencies, changeCurrency } = this.props; 
 
     return (
-        <Switcher>
-        <select
-          onChange={(e) =>{
-              const selectedCurrency = e.target.value;
-              changeCurrency(selectedCurrency);
-          }}
-        >
-        {data.currencies.map(currency => { 
-            addCurrencies(currency.symbol)
-            return (
-                <option key={currency.symbol} value={currency.symbol} label={`${currency.symbol} ${currency.label}`}/>
-            )
-        })}
-        </select>
-        </Switcher>
+        <SwitcherContainer>
+        <ul>
+        {
+            data.currencies.map(currency => { 
+                addCurrencies(currency.symbol)
+                return (
+                    <li key={currency.symbol} 
+                        value={currency.symbol}
+                        onClick={() => {changeCurrency(currency.symbol);}}
+                    >
+                        {`${currency.symbol} ${currency.label}`}
+                    </li>
+                )
+            })
+        }
+        </ul>
+        </SwitcherContainer>
     )
   }
 }

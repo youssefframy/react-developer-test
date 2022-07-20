@@ -6,7 +6,14 @@ import { withRouter } from 'react-router-dom';
 
 
 const Container = styled.div`
-  margin-inline: 3vw;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin: auto;
+  margin-top: 160px;
+  max-width: 1380px;
+  display: flex;
+  flex-direction: column;
 `
 class PDP extends Component {
   render() {

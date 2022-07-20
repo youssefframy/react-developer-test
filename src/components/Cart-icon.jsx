@@ -31,6 +31,7 @@ const CartBadge = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  opacity: 0.9;
 `
 
 class CartIcon extends Component {

@@ -1,5 +1,9 @@
 import CurrencyActionTypes from "./currency-types";
 
+export const toggleCurrencyHidden = () => ({ 
+    type: CurrencyActionTypes.TOGGLE_CURRENCY_HIDDEN
+});
+
 export const addCurrencies = currencies => ({
     type: CurrencyActionTypes.ADD_CURRENCIES,
     payload: currencies

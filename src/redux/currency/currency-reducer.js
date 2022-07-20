@@ -3,6 +3,7 @@ import CurrencyActionTypes from "./currency-types";
 import { indexOfCurrency } from "./currency-utils";
 
 const INITIAL_STATE = {
+    hidden: true,
     currencyList: [],
     currency: "$",
     currencyIndex: 0
@@ -10,6 +11,13 @@ const INITIAL_STATE = {
 
 const currencyReducer = (state = INITIAL_STATE, action) => { 
     switch (action.type) {
+        case CurrencyActionTypes.TOGGLE_CURRENCY_HIDDEN:
+          return{
+            ...state,
+            hidden: !state.hidden
+          }
+
+
         case CurrencyActionTypes.ADD_CURRENCIES:
           return {
             ...state,

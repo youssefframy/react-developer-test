@@ -7,21 +7,33 @@ import CartIcon from './Cart-icon';
 import CartDropdown from './Cart-dropdown';
 import { default as CurrencySwitcher} from '../graphQL/Currency-container';
 
+import { toggleCurrencyHidden } from '../redux/currency/currency-action';
 import { changeCategory } from '../redux/category/category-action';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 
 const HeaderContainer = styled.div`
+  top: 0px;
+  left: 0px;
   width: 100%;
-  height: 20vh;
+  height: 80px;
+  background-color: #ffffff;
+  opacity: 1;
+  z-index: 20;
+  position: fixed;
   display: flex;
+  margin-bottom: 300px;
 `
 const Wrapper = styled.div`
-  width: 95%;
-  padding-top: 3vh;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin: auto;
+  max-width: 1380px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
+  position: relative;
 `
 
 const Left = styled.ul`   
@@ -33,13 +45,13 @@ const Left = styled.ul`
   list-style-type: none;
 `
 const Center = styled.div`
-  flex: 2;
-  margin-right: 13rem;
-  text-align: center;
   cursor: pointer;
+  position: absolute;
+  display: flex;
+  left: 50%;
+  transform: translateX(-50%);
 `
 const Right = styled.div`
-  flex: 1;
   display: flex;
   padding-right: 1rem;
   align-items: center;
@@ -89,6 +101,24 @@ const StyledLink = styled(Link)`
     }
 `;
 
+const CurrencyMenu = styled.div`
+  display: flex;
+  position: absolute;
+  margin-right: 10px;
+`
+
+const Arrow = styled.span`
+  font-size: 30px;
+  font-weight: 400;
+  margin-top: -20px;
+  padding-left: 10px;
+`
+
+const Currency = styled.span`
+  font-size: 18px;
+  font-weight: 400;
+`
+
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -101,7 +131,7 @@ class Header extends Component {
   }
   
   render() {
-    const { hidden, history, changeCategory } = this.props;
+    const { cartHidden, currencyHidden, toggleCurrencyHidden, history, currency, changeCategory } = this.props;
     const All = this.state.all ? 'active' : 'hidden'; 
     const Tech = this.state.tech ? 'active' : 'hidden'; 
     const Clothes = this.state.clothes ? 'active' : 'hidden'; 
@@ -145,12 +175,16 @@ class Header extends Component {
 
           <Right >
               <MenuItem>
-                <CurrencySwitcher/>
+                <CurrencyMenu onClick={() => toggleCurrencyHidden()}>
+                  <Currency>{currency}</Currency>
+                  {currencyHidden ? null : <CurrencySwitcher/>}
+                  {currencyHidden ? <Arrow>&#751;</Arrow> : <Arrow>&#752;</Arrow>}
+                </CurrencyMenu>
               </MenuItem>
               <MenuItem>
                 <CartIcon/>
               </MenuItem>
-              {hidden ? null : <CartDropdown/>}
+              {cartHidden ? null : <CartDropdown/>}
           </Right>
         </Wrapper>
       </HeaderContainer>
@@ -158,12 +192,15 @@ class Header extends Component {
   }
 }
 
-const mapStateToProps = ({cart: {hidden}}) => ({
-  hidden,
+const mapStateToProps = (state) => ({
+  cartHidden: state.cart.hidden,
+  currencyHidden: state.currencySwitcher.hidden,
+  currency: state.currencySwitcher.currency
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  changeCategory: (category) => dispatch(changeCategory(category))
+  changeCategory: (category) => dispatch(changeCategory(category)),
+  toggleCurrencyHidden: () => dispatch(toggleCurrencyHidden()),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));
