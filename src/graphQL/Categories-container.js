@@ -6,7 +6,7 @@ import Categories from '../components/Categories';
 import { connect } from 'react-redux';
 
 
-const GET_CATEGORIES = gql`
+const GET_PRODUCTS_BY_CATEGORY = gql`
     query category($title: String!)
     {
         category (input: {title: $title}) {
@@ -45,7 +45,7 @@ class CategoriesQuery extends Component {
 
       return (
         <Query 
-            query={GET_CATEGORIES}
+            query={GET_PRODUCTS_BY_CATEGORY}
             variables= {{title: title}}
         >
             {

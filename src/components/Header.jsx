@@ -5,13 +5,13 @@ import Logo from "../assets/logo.svg";
 import CartIcon from './Cart-icon';
 
 import CartDropdown from './Cart-dropdown';
+import { default as CategoryNames } from '../graphQL/Category-names-container';
 import { default as CurrencySwitcher} from '../graphQL/Currency-container';
 
 import { toggleCurrencyHidden } from '../redux/currency/currency-action';
 import { closeCartOverlay } from '../redux/cart/cart-action';
-import { changeCategory } from '../redux/category/category-action';
 import { connect } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 const HeaderContainer = styled.div`
   top: 0px;
@@ -40,7 +40,7 @@ const Wrapper = styled.div`
 const Left = styled.ul`   
   flex: 2;
   text-align: flex-start;
-  padding-left: 3vw;
+  padding-left: 2vw;
   align-items: center;
   text-decoration: none;
   list-style-type: none;
@@ -59,29 +59,6 @@ const Right = styled.div`
   justify-content: flex-end;
 `
 
-const Label = styled.li`
-  display: inline-block;
-  border: none;
-  font-family: Raleway;
-  background: transparent;
-  text-transform: uppercase;
-  font-size: 15px;
-  font-weight: 400;
-  padding: 1rem;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.2s;
-
-  &:hover{
-    color: #5ECE7B;
-  }
-
-  &.active{
-    color: #5ECE7B;
-    border-bottom: 2px solid #5ECE7B;
-  }
-
-`
 const MenuItem = styled.div`
   position: relative;
   display: flex;
@@ -93,19 +70,12 @@ const MenuItem = styled.div`
   cursor: pointer;
 `
 
-const StyledLink = styled(Link)`
-    text-decoration: none;
-    color: #1D1F22;
-
-    &:focus, &:hover, &:visited, &:link, &:active {
-        text-decoration: none;
-    }
-`;
-
 const CurrencyMenu = styled.div`
   display: flex;
   position: absolute;
+  width: 50px;
   margin-right: 10px;
+
 `
 
 const Arrow = styled.span`
@@ -122,13 +92,13 @@ const Currency = styled.span`
 
 class Header extends Component {
   render() {
-    const { cartHidden, currencyHidden, toggleCurrencyHidden, history, currency, closeCartOverlay, changeCategory } = this.props;
+    const { cartHidden, currencyHidden, toggleCurrencyHidden, history, currency, closeCartOverlay } = this.props;
 
     return (
       <HeaderContainer>
         <Wrapper>
           <Left>
-
+            <CategoryNames/>
           </Left>
         
         <Center>
@@ -138,7 +108,9 @@ class Header extends Component {
           <Right >
               <MenuItem>
                 <CurrencyMenu onClick={() => {
-                  closeCartOverlay();
+                  if(cartHidden === false){
+                    closeCartOverlay();
+                  }
                   toggleCurrencyHidden();
                 }}>
                   <Currency>{currency}</Currency>
@@ -164,7 +136,6 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  changeCategory: (category) => dispatch(changeCategory(category)),
   toggleCurrencyHidden: () => dispatch(toggleCurrencyHidden()),
   closeCartOverlay: () => dispatch(closeCartOverlay()),
 });

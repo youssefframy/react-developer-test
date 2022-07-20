@@ -38,10 +38,12 @@ const CartBadge = styled.div`
 class CartIcon extends Component {
 
   render() {
-    const { toggleCartHidden, closeCurrencyOverlay, itemCount }  = this.props;
+    const { toggleCartHidden, currencyHidden, closeCurrencyOverlay, itemCount }  = this.props;
     return (
       <LogoContainer onClick={() => {
+        if(currencyHidden === false){
           closeCurrencyOverlay();
+        }
           toggleCartHidden();
         }}>
         <CartBadge> {itemCount} </CartBadge>
@@ -57,7 +59,8 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({ 
-  itemCount: selectCartItemsCount(state)
+  itemCount: selectCartItemsCount(state),
+  currencyHidden: state.currencySwitcher.hidden
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartIcon);
