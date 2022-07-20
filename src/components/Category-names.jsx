@@ -2,8 +2,11 @@ import React, { Component } from 'react'
 import styled from 'styled-components';
 
 import { Link }from 'react-router-dom';
-import { changeCategory } from '../redux/category/category-action';
 import { connect } from 'react-redux';
+
+import { changeCategory } from '../redux/category/category-action';
+import { closeCartOverlay } from '../redux/cart/cart-action';
+import { closeCurrencyOverlay } from '../redux/currency/currency-action';
 
 
 const Label = styled.p`
@@ -38,7 +41,7 @@ const StyledLink = styled(Link)`
 
 class CategoryNames extends Component {
   render() {
-    const { data, changeCategory, title } = this.props;
+    const { data, changeCategory, title, closeCartOverlay, closeCurrencyOverlay, cartHidden, currencyHidden } = this.props;
 
     return (
       <div>
@@ -48,7 +51,12 @@ class CategoryNames extends Component {
                     <Label 
                       activeColor={title === category.name ? "#5ECE7B" : "#1D1F22"}
                       activeBorder={title === category.name ? "#5ECE7B" : "transparent"}
-                      onClick={() => changeCategory(category.name)}
+                      onClick={() => {
+                        if(cartHidden === false) closeCartOverlay();
+                        if(currencyHidden === false) closeCurrencyOverlay();
+
+                        changeCategory(category.name)
+                      }}
                     >
                     {category.name}
                     </Label>
@@ -62,10 +70,14 @@ class CategoryNames extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
   changeCategory: (category) => dispatch(changeCategory(category)),
+  closeCartOverlay: () => dispatch(closeCartOverlay()),
+  closeCurrencyOverlay: () => dispatch(closeCurrencyOverlay()),
 });
 
 const mapStateToProps = (state) => ({
-  title : state.category.categoryTitle
+  title : state.category.categoryTitle,
+  cartHidden: state.cart.hidden,
+  currencyHidden: state.currencySwitcher.hidden
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CategoryNames);
