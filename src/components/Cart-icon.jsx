@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import CartLogo from "../assets/cart.svg";
 
 import { toggleCartHidden } from '../redux/cart/cart-action';
+import { closeCurrencyOverlay } from '../redux/currency/currency-action';
 import { selectCartItemsCount } from '../redux/cart/cart-selectors';
 import { connect } from 'react-redux';
 
@@ -37,9 +38,12 @@ const CartBadge = styled.div`
 class CartIcon extends Component {
 
   render() {
-    const { toggleCartHidden, itemCount }  = this.props;
+    const { toggleCartHidden, closeCurrencyOverlay, itemCount }  = this.props;
     return (
-      <LogoContainer onClick={() => toggleCartHidden()}>
+      <LogoContainer onClick={() => {
+          closeCurrencyOverlay();
+          toggleCartHidden();
+        }}>
         <CartBadge> {itemCount} </CartBadge>
         <img src={CartLogo} alt="cart"/>
       </LogoContainer>
@@ -49,6 +53,7 @@ class CartIcon extends Component {
 
 const mapDispatchToProps = dispatch => ({
     toggleCartHidden: () => dispatch(toggleCartHidden()),
+    closeCurrencyOverlay: () => dispatch(closeCurrencyOverlay()),
 });
 
 const mapStateToProps = state => ({ 

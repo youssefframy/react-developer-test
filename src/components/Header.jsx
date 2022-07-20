@@ -8,6 +8,7 @@ import CartDropdown from './Cart-dropdown';
 import { default as CurrencySwitcher} from '../graphQL/Currency-container';
 
 import { toggleCurrencyHidden } from '../redux/currency/currency-action';
+import { closeCartOverlay } from '../redux/cart/cart-action';
 import { changeCategory } from '../redux/category/category-action';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
@@ -121,7 +122,7 @@ const Currency = styled.span`
 
 class Header extends Component {
   render() {
-    const { cartHidden, currencyHidden, toggleCurrencyHidden, history, currency, changeCategory } = this.props;
+    const { cartHidden, currencyHidden, toggleCurrencyHidden, history, currency, closeCartOverlay, changeCategory } = this.props;
 
     return (
       <HeaderContainer>
@@ -136,7 +137,10 @@ class Header extends Component {
 
           <Right >
               <MenuItem>
-                <CurrencyMenu onClick={() => toggleCurrencyHidden()}>
+                <CurrencyMenu onClick={() => {
+                  closeCartOverlay();
+                  toggleCurrencyHidden();
+                }}>
                   <Currency>{currency}</Currency>
                   {currencyHidden ? null : <CurrencySwitcher/>}
                   {currencyHidden ? <Arrow>&#751;</Arrow> : <Arrow>&#752;</Arrow>}
@@ -162,6 +166,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   changeCategory: (category) => dispatch(changeCategory(category)),
   toggleCurrencyHidden: () => dispatch(toggleCurrencyHidden()),
+  closeCartOverlay: () => dispatch(closeCartOverlay()),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));

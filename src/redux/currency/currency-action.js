@@ -4,6 +4,10 @@ export const toggleCurrencyHidden = () => ({
     type: CurrencyActionTypes.TOGGLE_CURRENCY_HIDDEN
 });
 
+export const closeCurrencyOverlay = () => ({ 
+    type: CurrencyActionTypes.CLOSE_CURRENCY_OVERLAY
+});
+
 export const addCurrencies = currencies => ({
     type: CurrencyActionTypes.ADD_CURRENCIES,
     payload: currencies

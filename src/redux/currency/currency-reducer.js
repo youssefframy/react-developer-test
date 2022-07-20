@@ -17,6 +17,11 @@ const currencyReducer = (state = INITIAL_STATE, action) => {
             hidden: !state.hidden
           }
 
+        case CurrencyActionTypes.CLOSE_CURRENCY_OVERLAY:
+          return{
+            ...state,
+            hidden: true
+          }  
 
         case CurrencyActionTypes.ADD_CURRENCIES:
           return {
