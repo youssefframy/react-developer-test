@@ -11,11 +11,13 @@ import { changeCategory } from '../redux/category/category-action';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 
-const Container = styled.div`
+const HeaderContainer = styled.div`
+  width: 100%;
   height: 20vh;
+  display: flex;
 `
 const Wrapper = styled.div`
-  width: 98%;
+  width: 95%;
   padding-top: 3vh;
   display: flex;
   align-items: center;
@@ -59,7 +61,6 @@ const Label = styled.li`
 
   &:hover{
     color: #5ECE7B;
-    border-bottom: 2px solid #5ECE7B;
   }
 
   &.active{
@@ -79,6 +80,15 @@ const MenuItem = styled.div`
   cursor: pointer;
 `
 
+const StyledLink = styled(Link)`
+    text-decoration: none;
+    color: #1D1F22;
+
+    &:focus, &:hover, &:visited, &:link, &:active {
+        text-decoration: none;
+    }
+`;
+
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -97,10 +107,10 @@ class Header extends Component {
     const Clothes = this.state.clothes ? 'active' : 'hidden'; 
 
     return (
-      <Container>
+      <HeaderContainer>
         <Wrapper>
           <Left>
-            <Link to={`/`}>
+            <StyledLink to={`/`}>
               <Label className={All} value="all" onClick={(e) => {
                 this.setState({ all: true, tech: false, clothes: false });
                 const categoryName = (e.target.innerHTML);
@@ -108,8 +118,8 @@ class Header extends Component {
               }}>
               all
               </Label>
-            </Link>
-            <Link to={`/`}>
+            </StyledLink>
+            <StyledLink to={`/`}>
                 <Label className={Tech} onClick={(e) => {
                   this.setState({ tech: true, all: false, clothes: false});
                   const categoryName = (e.target.innerHTML);
@@ -117,8 +127,8 @@ class Header extends Component {
                 }}>
                 tech
                 </Label>
-              </Link>
-              <Link to={`/`}>        
+              </StyledLink>
+              <StyledLink to={`/`}>        
                 <Label className={Clothes} onClick={(e) => {
                   this.setState({ clothes: true, all: false, tech: false});
                   const categoryName = (e.target.innerHTML);
@@ -126,7 +136,7 @@ class Header extends Component {
                 }}>
                   clothes
                 </Label>
-              </Link>
+              </StyledLink>
           </Left>
         
         <Center>
@@ -143,7 +153,7 @@ class Header extends Component {
               {hidden ? null : <CartDropdown/>}
           </Right>
         </Wrapper>
-      </Container>
+      </HeaderContainer>
     )
   }
 }

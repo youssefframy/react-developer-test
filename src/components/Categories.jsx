@@ -3,9 +3,11 @@ import styled from 'styled-components';
 import CategoryItem from './Category-item';
 
 const Container = styled.div`
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    justify-content: center;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, auto);    
+  justify-items: center;
+  align-items: center;
 `
 class Categories extends Component {
   render() {

@@ -9,15 +9,20 @@ const Switcher = styled.div`
     select{
         background: transparent;
         border: none;
+        outline: none;
+        scroll-behavior: smooth;
         padding: 2px;
         cursor: pointer;
         font-size: 1rem;
         text-align: center;
         justify-content: center;
+        appearance: none;
+        border: 0;
 
         &:focus{
             outline: none;
         }
+    
     }
 `
 

@@ -22,7 +22,7 @@ const Image = styled.img`
   height: 190px;
   align-items: center;
   justify-content: right;
-  object-fit: cover;
+  object-fit: contain;
 `
 const DescriptionContainer = styled.div`
   width: 136px;
@@ -74,7 +74,6 @@ class CartItem extends Component {
   render() {
     const { item, addItem, removeItem, currencyIndex } = this.props;
     const selectedAttributes = item.selectedAttributes;
-    console.log(item.id)
 
     return (
       <ItemContainer>

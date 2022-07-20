@@ -4,7 +4,7 @@ import { gql } from 'apollo-boost';
 import Product from '../components/Product-item';
 
 
-const GET_CATEGORIES = gql`
+const GET_PRODUCT = gql`
     query category($id: String!)
     {
         product(id: $id){
@@ -40,7 +40,7 @@ class ProductQuery extends Component {
 
       return (
         <Query 
-            query={GET_CATEGORIES}
+            query={GET_PRODUCT}
             variables= {{id: id}}
         >
             {

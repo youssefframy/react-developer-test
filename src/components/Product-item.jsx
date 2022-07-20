@@ -9,10 +9,12 @@ import { connect } from 'react-redux';
 
 const ProductContainer = styled.div`
   display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
 `
 
 const DescriptionContainer = styled.div`
-  flex:1;
   margin-left: 5vw;
   width: 292px;
   align-items: center;
@@ -30,7 +32,7 @@ const DescriptionContainer = styled.div`
 `
 
 const ImageContainer = styled.div`
-  flex: 1;
+  margin-inline: 4vw;
   img{
     width: 610px;
     height: 511px;
