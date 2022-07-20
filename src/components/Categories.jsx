@@ -3,15 +3,13 @@ import styled from 'styled-components';
 import CategoryItem from './Category-item';
 
 const Container = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
 `
 class Categories extends Component {
   render() {
     const { data } = this.props;
-
     return (
       <Container>
         {data.category.products.map(product => { 

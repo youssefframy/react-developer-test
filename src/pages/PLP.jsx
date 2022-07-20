@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 
 const Container = styled.div`
   margin-inline: 3vw;
+  width: 95%;
 `
 const Title = styled.div`
   margin-bottom: 12vh;

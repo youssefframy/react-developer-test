@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from "styled-components";
+import parse from "html-react-parser";
 import Attributes from './Attributes';
 
 import { addProduct } from '../redux/cart/cart-action';
@@ -12,7 +13,7 @@ const ProductContainer = styled.div`
 
 const DescriptionContainer = styled.div`
   flex:1;
-  margin-left: -5vw;
+  margin-left: 5vw;
   width: 292px;
   align-items: center;
 
@@ -29,7 +30,7 @@ const DescriptionContainer = styled.div`
 `
 
 const ImageContainer = styled.div`
-  flex: 2;
+  flex: 1;
   img{
     width: 610px;
     height: 511px;
@@ -188,7 +189,7 @@ class Product extends Component {
           {product.inStock 
             ?<AddToCart onClick={() => {
               if(attributes.length === 1){
-                return null
+                return <p>test</p>
               } else if (attributes.length === product.attributes.length + 1) {
                 addProduct(product, attributes, newProductId)
               }
@@ -196,7 +197,7 @@ class Product extends Component {
               ADD TO CART</AddToCart>
             :<AddToCart>OUT OF STOCK</AddToCart>
           }
-          <span dangerouslySetInnerHTML={{ __html: product.description}}/>
+          <span>{parse(product.description)}</span>
         </DescriptionContainer>
       </ProductContainer>
     )

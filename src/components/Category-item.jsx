@@ -15,7 +15,6 @@ const AddToCart = styled.img`
   &:hover{
     transform: scale(1.05);
     transition: transform 0.5s ease;
-
   }
 `
 
@@ -23,7 +22,7 @@ const Image = styled.img`
   width: 356px;
   height: 300px;
   justify-content: center;
-  object-fit: cover;
+  object-fit: contain;
   &:hover{
     box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
   }
