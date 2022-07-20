@@ -14,6 +14,12 @@ const cartReducer = (state = INITIAL_STATE, action) =>{
                 hidden: !state.hidden
             }
 
+        case CartActionTypes.CLOSE_CART_OVERLAY:
+            return{
+                ...state, 
+                hidden: true
+            }
+
         case CartActionTypes.ADD_PRODUCT:
             return {
                 ...state,

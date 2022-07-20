@@ -120,53 +120,14 @@ const Currency = styled.span`
 `
 
 class Header extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      all: true,
-      tech: false,
-      clothes: false
-    }
-  }
-  
   render() {
     const { cartHidden, currencyHidden, toggleCurrencyHidden, history, currency, changeCategory } = this.props;
-    const All = this.state.all ? 'active' : 'hidden'; 
-    const Tech = this.state.tech ? 'active' : 'hidden'; 
-    const Clothes = this.state.clothes ? 'active' : 'hidden'; 
 
     return (
       <HeaderContainer>
         <Wrapper>
           <Left>
-            <StyledLink to={`/`}>
-              <Label className={All} value="all" onClick={(e) => {
-                this.setState({ all: true, tech: false, clothes: false });
-                const categoryName = (e.target.innerHTML);
-                changeCategory(categoryName);
-              }}>
-              all
-              </Label>
-            </StyledLink>
-            <StyledLink to={`/`}>
-                <Label className={Tech} onClick={(e) => {
-                  this.setState({ tech: true, all: false, clothes: false});
-                  const categoryName = (e.target.innerHTML);
-                  changeCategory(categoryName);
-                }}>
-                tech
-                </Label>
-              </StyledLink>
-              <StyledLink to={`/`}>        
-                <Label className={Clothes} onClick={(e) => {
-                  this.setState({ clothes: true, all: false, tech: false});
-                  const categoryName = (e.target.innerHTML);
-                  changeCategory(categoryName);
-                }}>
-                  clothes
-                </Label>
-              </StyledLink>
+
           </Left>
         
         <Center>

@@ -1,5 +1,9 @@
 import CartActionTypes from './cart-types';
 
+export const closeCartOverlay = () => ({
+    type: CartActionTypes.CLOSE_CART_OVERLAY
+})
+
 export const toggleCartHidden = () => ({ 
     type: CartActionTypes.TOGGLE_CART_HIDDEN
 });

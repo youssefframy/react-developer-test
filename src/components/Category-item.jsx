@@ -40,6 +40,7 @@ const ProductContainer = styled.div`
   transition: transform 0.25s ease-out;
   opacity: ${props => props.inStock};
   position: relative;
+  z-index: ${props => props.index};
 
   &:hover{
     box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
@@ -93,10 +94,13 @@ const Price = styled.p`
 class CategoryItem extends Component {
 
   render() {
-    const {product, selectedCurrency, addProduct, currencyIndex, history} = this.props;
+    const {product, cartHidden, selectedCurrency, addProduct, currencyIndex, history} = this.props;
         
     return (
-      <ProductContainer inStock={product.inStock ? null :"0.5"} cursor={product.inStock ? "pointer" : "default"}>
+      <ProductContainer 
+        inStock={product.inStock ? null :"0.5"} cursor={product.inStock ? "pointer" : "default"}
+        index={cartHidden ? 0 : -1}
+        >
       { product.inStock 
         ? <InStock> 
           <Link to={`/product/${product.id}`}>
@@ -130,6 +134,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (state) => ({
   currencyIndex: state.currencySwitcher.currencyIndex,
+  cartHidden: state.cart.hidden
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CategoryItem))
