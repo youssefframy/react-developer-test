@@ -22,6 +22,7 @@ const Image = styled.img`
   width: 356px;
   height: 300px;
   justify-content: center;
+  padding-block: 8px;
   object-fit: contain;
   opacity: ${props => props.inStock};
 
