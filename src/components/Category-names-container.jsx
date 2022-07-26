@@ -1,16 +1,9 @@
 import React, { Component } from 'react';
 import { Query } from 'react-apollo';
-import { gql } from 'apollo-boost';
 
-import CategoryNames from '../components/Category-names';
+import CategoryNames from './Category-names';
+import { GET_CATEGORIES } from '../graphQL/Queries';
 
-const GET_CATEGORIES = gql`
-    query categories {
-        categories{
-            name
-        }
-    }
-`
 class CategoryNamesQuery extends Component {
     render() {
 

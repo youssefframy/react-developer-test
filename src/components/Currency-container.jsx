@@ -1,17 +1,9 @@
 import React, { Component } from 'react';
 import { Query } from 'react-apollo';
-import { gql } from 'apollo-boost';
 
-import CurrencySwitcher from '../components/Currency-switcher';
+import CurrencySwitcher from './Currency-switcher';
+import { GET_CURRENCY_DATA } from '../graphQL/Queries';
 
-const GET_CURRENCY_DATA = gql `
-    {
-        currencies{
-            label
-            symbol
-        }
-    }
-`
 class CurrencyQuery extends Component {
     render() {
       return (

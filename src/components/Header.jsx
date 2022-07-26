@@ -5,8 +5,8 @@ import Logo from "../assets/logo.svg";
 import CartIcon from './Cart-icon';
 
 import CartDropdown from './Cart-dropdown';
-import { default as CategoryNames } from '../graphQL/Category-names-container';
-import { default as CurrencySwitcher} from '../graphQL/Currency-container';
+import { default as CategoryNames } from './Category-names-container';
+import { default as CurrencySwitcher} from './Currency-container';
 
 import { toggleCurrencyHidden } from '../redux/currency/currency-action';
 import { closeCartOverlay } from '../redux/cart/cart-action';
