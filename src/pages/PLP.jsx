@@ -18,7 +18,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   background: ${props => props.BackgroundColor};
-  position: ${props => props.scroll};
 `
 const Title = styled.div`
   margin-left: 3vw;
@@ -34,11 +33,15 @@ class PLP extends Component {
   render() {
     const { title, cartHidden, closeCartOverlay, history } = this.props;
     const id = history.location.pathname.slice(9);
+    if(cartHidden === false) {
+      document.body.style.overflow = "hidden";
+    } else if (cartHidden) {
+      document.body.style.overflow = "visible";
+    }
 
     return (
       <Container 
         BackgroundColor={cartHidden ? "transparent" : "rgba(57, 55, 72, 0.22)"}
-        scroll={cartHidden ? "relative": "fixed"}
         onClick={() => cartHidden ? null : closeCartOverlay()}
       >
         <Title>{title}</Title>
