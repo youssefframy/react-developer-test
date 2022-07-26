@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import Logo from "../assets/logo.svg";
 import CartIcon from './Cart-icon';
@@ -10,35 +12,34 @@ import { default as CurrencySwitcher} from './Currency-container';
 
 import { toggleCurrencyHidden } from '../redux/currency/currency-action';
 import { closeCartOverlay } from '../redux/cart/cart-action';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { closeCurrencyOverlay } from '../redux/currency/currency-action';
+
 
 const HeaderContainer = styled.div`
   top: 0px;
   left: 0px;
   width: 100%;
-  height: 80px;
   background-color: #ffffff;
   opacity: 1;
-  z-index: 20;
+  z-index: 10;
   position: fixed;
   display: flex;
-  margin-bottom: 300px;
 `
 const Wrapper = styled.div`
   width: 100%;
   padding-right: 15px;
   padding-left: 15px;
   margin: auto;
+  margin-top: 10px;
   max-width: 1380px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: relative;
+  height: 50px;
 `
 
 const Left = styled.ul`   
-  flex: 2;
   text-align: flex-start;
   padding-left: 2vw;
   align-items: center;
@@ -55,6 +56,7 @@ const Center = styled.div`
 const Right = styled.div`
   display: flex;
   padding-right: 1rem;
+  width: 100px;
   align-items: center;
   justify-content: flex-end;
 `
@@ -92,16 +94,19 @@ const Currency = styled.span`
 
 class Header extends Component {
   render() {
-    const { cartHidden, currencyHidden, toggleCurrencyHidden, history, currency, closeCartOverlay } = this.props;
+    const { cartHidden, currencyHidden, toggleCurrencyHidden, history, currency, closeCartOverlay, closeCurrencyOverlay } = this.props;
 
     return (
       <HeaderContainer>
-        <Wrapper>
+        <Wrapper onClick={() => {
+          if(cartHidden === false) return closeCartOverlay();
+          if(currencyHidden === false) return closeCurrencyOverlay();
+        }}>
           <Left>
             <CategoryNames/>
           </Left>
         
-        <Center>
+        <Center >
             <img src={Logo} alt="logo" onClick={() => history.push('/')} />
         </Center>
 
@@ -119,7 +124,7 @@ class Header extends Component {
                 </CurrencyMenu>
               </MenuItem>
               <MenuItem>
-                <CartIcon/>
+                <CartIcon className="cart-icon"/>
               </MenuItem>
               {cartHidden ? null : <CartDropdown/>}
           </Right>
@@ -138,6 +143,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   toggleCurrencyHidden: () => dispatch(toggleCurrencyHidden()),
   closeCartOverlay: () => dispatch(closeCartOverlay()),
+  closeCurrencyOverlay: () => dispatch(closeCurrencyOverlay())
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));

@@ -4,8 +4,13 @@ import {default as Categories} from '../graphQL/Categories-container';
 
 import { connect } from 'react-redux';
 import { closeCartOverlay } from '../redux/cart/cart-action';
+import { closeCurrencyOverlay } from '../redux/currency/currency-action';
 import { withRouter } from 'react-router-dom';
 
+
+const Background = styled.div`
+  background: ${props => props.BackgroundColor};
+`
 
 const Container = styled.div`
   width: 100%;
@@ -13,26 +18,26 @@ const Container = styled.div`
   padding-right: 15px;
   padding-left: 15px;
   margin: auto;
-  margin-top: 150px;
   max-width: 1380px;
   display: flex;
   flex-direction: column;
-  background: ${props => props.BackgroundColor};
 `
 const Title = styled.div`
-  margin-left: 3vw;
-  margin-bottom: 10vh;
+  height: 40vh;
+  margin-left: 2vw;
   font-weight: 400;
   font-size: 42px;
-  position: relative;
   color: #1D1F22;
   text-transform: uppercase;
+  display: flex;
+  align-items: center;
 `
 
 class PLP extends Component {
   render() {
-    const { title, cartHidden, closeCartOverlay, history } = this.props;
+    const { title, cartHidden, currencyHidden, closeCurrencyOverlay, closeCartOverlay, history } = this.props;
     const id = history.location.pathname.slice(9);
+
     if(cartHidden === false) {
       document.body.style.overflow = "hidden";
     } else if (cartHidden) {
@@ -40,24 +45,30 @@ class PLP extends Component {
     }
 
     return (
-      <Container 
+      <Background 
         BackgroundColor={cartHidden ? "transparent" : "rgba(57, 55, 72, 0.22)"}
-        onClick={() => cartHidden ? null : closeCartOverlay()}
-      >
-        <Title>{title}</Title>
-        <Categories id={id}/>
-      </Container>
+        onClick={() => {
+            if(cartHidden === false) closeCartOverlay();
+            if(currencyHidden === false) closeCurrencyOverlay();
+          }}>
+        <Container BackgroundColor={cartHidden ? "transparent" : "rgba(57, 55, 72, 0.22)"}>
+          <Title>{title}</Title>
+          <Categories id={id}/>
+        </Container>
+      </Background>
     )
   }
 }
 
 const mapStateToProps = state => ({
   title: state.category.categoryTitle,
-  cartHidden: state.cart.hidden
+  cartHidden: state.cart.hidden,
+  currencyHidden: state.currencySwitcher.hidden
 });
 
 const mapDispatchToProps = dispatch => ({
   closeCartOverlay: () => dispatch(closeCartOverlay()),
+  closeCurrencyOverlay: () => dispatch(closeCurrencyOverlay())
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PLP));
