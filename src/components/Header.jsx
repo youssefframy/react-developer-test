@@ -106,11 +106,11 @@ class Header extends Component {
             <CategoryNames/>
           </Left>
         
-        <Center >
+        <Center>
             <img src={Logo} alt="logo" onClick={() => history.push('/')} />
         </Center>
 
-          <Right >
+          <Right>
               <MenuItem>
                 <CurrencyMenu onClick={() => {
                   if(cartHidden === false){
@@ -126,9 +126,9 @@ class Header extends Component {
               <MenuItem>
                 <CartIcon className="cart-icon"/>
               </MenuItem>
-              {cartHidden ? null : <CartDropdown/>}
           </Right>
         </Wrapper>
+        {cartHidden ? null : <CartDropdown/>}
       </HeaderContainer>
     )
   }
