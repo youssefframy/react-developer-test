@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 
 import CurrencySwitcher from './Currency-switcher';
+import LoadingSpinner from './Loading-spinner';
+
 import { GET_CURRENCY_DATA } from '../graphQL/Queries';
 
 class CurrencyQuery extends Component {
@@ -10,7 +12,7 @@ class CurrencyQuery extends Component {
         <Query query={GET_CURRENCY_DATA}>
             {
                 ({loading, data}) => {
-                    if (loading) return <h1>Loading</h1>;  
+                    if (loading) return <LoadingSpinner />;  
                     return <CurrencySwitcher data = {data}/>
                 }
             }

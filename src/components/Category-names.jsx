@@ -54,7 +54,6 @@ class CategoryNames extends Component {
                       onClick={() => {
                         if(cartHidden === false) closeCartOverlay();
                         if(currencyHidden === false) closeCurrencyOverlay();
-
                         changeCategory(category.name)
                       }}
                     >

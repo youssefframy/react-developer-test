@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 
 import Categories from './Categories';
+import LoadingSpinner from './LoadingSpinner';
+
 import {GET_PRODUCTS_BY_CATEGORY} from '../graphQL/Queries';
 
 class CategoriesQuery extends Component {
@@ -15,7 +17,7 @@ class CategoriesQuery extends Component {
         >
             {
                 ({loading, data}) => {
-                    if (loading) return <h1>Loading...</h1>;
+                    if (loading) return <LoadingSpinner />;
                     return <Categories data = {data}/>
                 }
             }

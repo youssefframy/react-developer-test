@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 
 import Product from './Product-item';
+import LoadingSpinner from './Loading-spinner';
+
 import { GET_PRODUCT } from '../graphQL/Queries';
 
 class ProductQuery extends Component {
@@ -15,7 +17,7 @@ class ProductQuery extends Component {
         >
             {
                 ({loading, data}) => {
-                    if (loading) return <h1>Loading...</h1>;
+                    if (loading) return <LoadingSpinner />;
                     return <Product key={data.product.id} product={data.product}/>
                 }
             }
