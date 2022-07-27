@@ -6,10 +6,14 @@ import Attributes from './Attributes';
 import { addProduct } from '../redux/cart/cart-action';
 import { connect } from 'react-redux';
 
+import { closeCartOverlay } from '../redux/cart/cart-action';
+import { closeCurrencyOverlay } from '../redux/currency/currency-action';
 
 const ProductContainer = styled.div`
   display: flex;
-  margin-top: -7vh;
+  justify-content: center;
+  padding-block: 80px;
+  margin-top: -130px;
 `
 
 const DescriptionContainer = styled.div`
@@ -155,14 +159,16 @@ class Product extends Component {
   }
   
   render() {
-    const { product, currencyIndex, addProduct } = this.props; 
+    const { product, currencyIndex, addProduct, cartHidden, currencyHidden, closeCurrencyOverlay, closeCartOverlay } = this.props; 
     const { currentImageIndex, attributes, attributeIndex, selectedAllAttributes } = this.state;
     const arrayId = attributes.map((attr) => attr.name + attr.value);
     const sortedArray = arrayId.sort().toString();
     const newProductId = product.id + sortedArray;
-
     return (
-      <ProductContainer>
+      <ProductContainer onClick={() => {
+        if(cartHidden === false) return closeCartOverlay();
+        if(currencyHidden === false) return closeCurrencyOverlay();
+      }}>
           <ImageBox>
             {
               product.gallery.length === 1 ? null
@@ -213,10 +219,15 @@ class Product extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
   addProduct: (product, attributes, newProductId) => dispatch(addProduct(product, attributes, newProductId)),
+  closeCartOverlay: () => dispatch(closeCartOverlay()),
+  closeCurrencyOverlay: () => dispatch(closeCurrencyOverlay())
 });
 
 const mapStateToProps = (state) => ({
-  currencyIndex: state.currencySwitcher.currencyIndex
+  currencyIndex: state.currencySwitcher.currencyIndex,
+  currencyHidden: state.currencySwitcher.hidden,
+  currency: state.currencySwitcher.currency,
+  cartHidden: state.cart.hidden
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Product);

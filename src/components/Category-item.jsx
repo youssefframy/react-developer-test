@@ -12,6 +12,7 @@ const AddToCart = styled.img`
   top: 70%;
   right: 5%;
   opacity: 0;
+  
   &:hover{
     transform: scale(1.05);
     transition: transform 0.5s ease;
@@ -43,6 +44,7 @@ const ProductContainer = styled.div`
   transition: transform 0.25s ease-out;
   opacity: ${props => props.opacity};
   position: relative;
+  z-index: ${props => props.index};
   
   &:hover{
     box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
@@ -103,6 +105,7 @@ class CategoryItem extends Component {
       <ProductContainer 
         cursor={product.inStock ? "pointer" : "default"}
         opacity={cartHidden ? 1 : 0.5}
+        index={cartHidden ? 0 : -1}
       >
       { product.inStock 
         ? <InStock > 

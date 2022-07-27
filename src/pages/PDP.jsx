@@ -14,6 +14,7 @@ const Container = styled.div`
   max-width: 1380px;
   display: flex;
   flex-direction: column;
+  margin-left: -5px;
 `
 class PDP extends Component {
   render() {
