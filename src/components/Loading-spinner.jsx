@@ -1,35 +1,25 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-const StyledSpinner = styled.svg`
-  animation: rotate 2s linear infinite;
-  margin: -25px 0 0 -25px;
-  width: 50px;
-  height: 50px;
-  
-  & .path {
-    stroke: #5652BF;
-    stroke-linecap: round;
-    animation: dash 1.5s ease-in-out infinite;
-  }
-  
-  @keyframes rotate {
+const StyledSpinner = styled.h1`
+  top: 40%;
+  left: 47%;
+  position: fixed;
+  border: 16px solid #e4e4e4 ;
+  border-top: 16px #5ECE7B solid;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  animation: spin 2s linear infinite;
+
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+
     100% {
       transform: rotate(360deg);
-    }
-  }
-  @keyframes dash {
-    0% {
-      stroke-dasharray: 1, 150;
-      stroke-dashoffset: 0;
-    }
-    50% {
-      stroke-dasharray: 90, 150;
-      stroke-dashoffset: -35;
-    }
-    100% {
-      stroke-dasharray: 90, 150;
-      stroke-dashoffset: -124;
     }
   }
 `;
@@ -37,16 +27,7 @@ const StyledSpinner = styled.svg`
 class LoadingSpinner extends Component {
   render() {
     return (
-        <StyledSpinner viewBox="0 0 50 50"> 
-            <circle
-              className="path"
-              cx="25"
-              cy="25"
-              r="20"
-              fill="none"
-              strokeWidth="4"
-            />
-        </StyledSpinner>
+        <StyledSpinner/> 
     )
   }
 }
