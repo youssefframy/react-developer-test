@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 
 import Categories from './Categories';
-import LoadingSpinner from './LoadingSpinner';
+import LoadingSpinner from './Loading-spinner';
 
 import {GET_PRODUCTS_BY_CATEGORY} from '../graphQL/Queries';
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled  from 'styled-components';
-import {default as Categories} from '../graphQL/Categories-container';
+import {default as Categories} from '../components/Categories-container';
 
 import { connect } from 'react-redux';
 import { closeCartOverlay } from '../redux/cart/cart-action';
