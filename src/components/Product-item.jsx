@@ -12,12 +12,17 @@ import { closeCurrencyOverlay } from '../redux/currency/currency-action';
 const ProductContainer = styled.div`
   display: flex;
   justify-content: center;
+  justify-items: center;
+  align-items: center;
+  width: 95%;
+  height: 100%;
   padding-block: 80px;
   margin-top: -130px;
+  margin-left: 3vw;  
 `
 
 const DescriptionContainer = styled.div`
-  flex: 1;
+
   width: 292px;
   align-items: center;
 
@@ -34,7 +39,7 @@ const DescriptionContainer = styled.div`
 `
 
 const ImageContainer = styled.div`
-  flex: 1;
+
   img{
     width: 610px;
     height: 511px;
