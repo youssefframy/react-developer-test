@@ -40,6 +40,7 @@ const ProductContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin-bottom: 5rem;
+  margin-right: 8rem;
   transform: translateZ(0);
   transition: transform 0.25s ease-out;
   opacity: ${props => props.opacity};

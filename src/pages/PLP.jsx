@@ -21,9 +21,10 @@ const Container = styled.div`
   max-width: 1380px;
   display: flex;
   flex-direction: column;
+  
 `
 const Title = styled.div`
-  height: 40vh;
+  height: 35vh;
   margin-left: 2vw;
   font-weight: 400;
   font-size: 42px;

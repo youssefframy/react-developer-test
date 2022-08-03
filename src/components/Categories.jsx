@@ -4,10 +4,10 @@ import CategoryItem from './Category-item';
 
 const Container = styled.div`
   width: 100%;
+  padding-bottom: 200px;
   display: grid;
-  grid-template-columns: repeat(3, auto);    
-  justify-items: center;
-  align-items: center;
+  grid-template-columns: repeat(3, 1fr);  
+
 `
 class Categories extends Component {
   render() {
