@@ -80,6 +80,7 @@ class Attributes extends Component {
           }
             return currentIndex
     })
+    
     return (
       <div>
         {attribute.type === "text"

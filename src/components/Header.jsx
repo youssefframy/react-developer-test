@@ -94,7 +94,7 @@ const Currency = styled.span`
 
 class Header extends Component {
   render() {
-    const { cartHidden, currencyHidden, toggleCurrencyHidden, history, currency, closeCartOverlay, closeCurrencyOverlay } = this.props;
+    const { cartHidden, currencyHidden, toggleCurrencyHidden, currency, closeCartOverlay, closeCurrencyOverlay } = this.props;
 
     return (
       <HeaderContainer>
@@ -107,7 +107,7 @@ class Header extends Component {
           </Left>
         
         <Center>
-            <img src={Logo} alt="logo" onClick={() => history.push('/')} />
+            <img src={Logo} alt="logo"/>
         </Center>
 
           <Right>

@@ -4,7 +4,7 @@ import CategoryItem from './Category-item';
 
 const Container = styled.div`
   width: 100%;
-  padding-bottom: 200px;
+  padding-bottom: 400px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);  
 

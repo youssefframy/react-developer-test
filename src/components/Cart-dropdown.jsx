@@ -11,13 +11,13 @@ import { toggleCartHidden } from '../redux/cart/cart-action';
 const DropdownContainer = styled.div`
   position: absolute;
   width: 350px;
-  height: 600px;
+  height: 650px;
   display: flex;
   flex-direction: column;
   padding: 20px;
   background-color: white;
   top: 60px;
-  right: 40px;
+  right: 200px;
   z-index: 5;
   box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
 `
@@ -33,7 +33,7 @@ const BagTitle = styled.span`
 `
 
 const CartItemsContainer = styled.div`
-  height: 400px;
+  height: 450px;
   display: flex;
   flex-direction: column;
   overflow: auto;

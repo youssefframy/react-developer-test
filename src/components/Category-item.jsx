@@ -98,9 +98,28 @@ const Price = styled.p`
   font-weight: 600;
 `
 class CategoryItem extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      attributes: [{
+        name: '',
+        value: ''
+      }]
+    }
+  }
+
 
   render() {
-    const {product, cartHidden, selectedCurrency, addProduct, currencyIndex, history} = this.props;
+    const {product, cartHidden, selectedCurrency, addProduct, currencyIndex} = this.props;
+    const { attributes }  = this.state
+
+    console.log(attributes);
+
+    if(product.inStock){
+      product.attributes.map(attribute => attribute.items[0].value)
+      
+    }
         
     return (
       <ProductContainer 
@@ -114,8 +133,11 @@ class CategoryItem extends Component {
             <Image src={product.gallery[0]} alt={product.name}/> 
           </Link>
           <AddToCart src={AddCart} alt="cart" onClick={() => {
-                if (product.attributes.length ===0) {return addProduct(product)};
-                return history.push(`/product/${product.id}`);
+                if (product.attributes.length ===0) {
+                  return addProduct(product)
+                } else {
+                  return addProduct(product)
+                }
               }
             }
           /> 
@@ -136,7 +158,7 @@ class CategoryItem extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  addProduct: product => dispatch(addProduct(product)),
+  addProduct: (product, attributes, newProductId) => dispatch(addProduct(product, attributes, newProductId)),
 });
 
 const mapStateToProps = (state) => ({

@@ -21,7 +21,6 @@ const Container = styled.div`
   max-width: 1380px;
   display: flex;
   flex-direction: column;
-  
 `
 const Title = styled.div`
   height: 35vh;

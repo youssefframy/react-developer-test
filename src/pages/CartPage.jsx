@@ -9,11 +9,18 @@ import { createStructuredSelector } from 'reselect';
 import { selectCartItems } from '../redux/cart/cart-selectors';
 
 const Container = styled.div`
-  margin-inline: 3vw;
+  width: 100%;
+  height: 100%;
+  padding-right: 15px;
+  padding-left: 100px;
+  margin: auto;
+  margin-top: 100px;
+  max-width: 1380px;
+  display: flex;
+  flex-direction: column;
 `
 const ItemContainer = styled.div`
   margin-block: 5%;
-
 `
 
 const EmptyMessage = styled.span`

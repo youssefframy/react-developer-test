@@ -25,7 +25,7 @@ const Image = styled.img`
   height: 288px;
   align-items: center;
   justify-content: right;
-  object-fit: cover;
+  object-fit: contain;
 `
 const CarouselButtonContainer  = styled.div`
   position: relative;

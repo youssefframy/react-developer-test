@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from "styled-components";
 import parse from "html-react-parser";
-import Attributes from './Attributes';
+import Attributes from './Product-attribute';
 
 import { addProduct } from '../redux/cart/cart-action';
 import { connect } from 'react-redux';
@@ -10,6 +10,7 @@ import { closeCartOverlay } from '../redux/cart/cart-action';
 import { closeCurrencyOverlay } from '../redux/currency/currency-action';
 
 const ProductContainer = styled.div`
+  max-width: 1380px;
   display: flex;
   justify-content: center;
   justify-items: center;
@@ -133,8 +134,8 @@ class Product extends Component {
 
     this.state = {
       attributes: [{
-        name: "",
-        value:""
+        name: '',
+        value: ''
       }],
       attributeIndex: 0,
       currentImageIndex : 0,
@@ -169,6 +170,10 @@ class Product extends Component {
     const arrayId = attributes.map((attr) => attr.name + attr.value);
     const sortedArray = arrayId.sort().toString();
     const newProductId = product.id + sortedArray;
+
+    console.log(attributes)
+    console.log(newProductId);
+
     return (
       <ProductContainer onClick={() => {
         if(cartHidden === false) return closeCartOverlay();
