@@ -117,7 +117,6 @@ const Price = styled.span`
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
-
 `
 
 const EmptyMessage = styled.span`
@@ -156,13 +155,15 @@ class CartDropdown extends Component {
         <ButtonsContainer>
             <ViewBagButton onClick = {() => {
               history.push('/cart');
-              dispatch(toggleCartHidden())
-              }}>
+              dispatch(toggleCartHidden());
+              document.body.style.overflow = "visible";
+            }}>
               VIEW BAG
-              </ViewBagButton>
+            </ViewBagButton>
             <CheckoutButton onClick = {() => {
-              history.push('/cart')
-              
+                history.push('/cart');
+                dispatch(toggleCartHidden())
+                document.body.style.overflow = "visible";
               }}>
               CHECK OUT
               </CheckoutButton>

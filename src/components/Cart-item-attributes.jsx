@@ -4,13 +4,13 @@ import styled from 'styled-components';
 const ValuesContainer = styled.div`
   display: flex;
   margin-top: -1rem;
-  align-items: center;
+  align-items: end;
   justify-content: flex-start;
 `
 
 const Title = styled.p`
-    font-weight: 400;
-    font-size: 1rem;
+  font-weight: 400;
+  font-size: 1rem;
 `
 
 const Value = styled.p`

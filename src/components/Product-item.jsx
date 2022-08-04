@@ -167,12 +167,10 @@ class Product extends Component {
   render() {
     const { product, currencyIndex, addProduct, cartHidden, currencyHidden, closeCurrencyOverlay, closeCartOverlay } = this.props; 
     const { currentImageIndex, attributes, attributeIndex, selectedAllAttributes } = this.state;
+    
     const arrayId = attributes.map((attr) => attr.name + attr.value);
     const sortedArray = arrayId.sort().toString();
     const newProductId = product.id + sortedArray;
-
-    console.log(attributes)
-    console.log(newProductId);
 
     return (
       <ProductContainer onClick={() => {

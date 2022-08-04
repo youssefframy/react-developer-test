@@ -109,17 +109,44 @@ class CategoryItem extends Component {
     }
   }
 
+  updateAttributes(props) {
+    const addedAttr = this.state.attributes.find(
+      (item) => item.name === props.name
+    );
+
+    let attributes = [...this.state.attributes];
+    let index = attributes.findIndex((attr) => attr.name === props.name);
+    this.setState({attributeIndex: index})
+    attributes[index] = {
+      ...attributes[index],
+      value: props.value,
+    };
+
+    addedAttr
+      ? this.setState({ attributes })
+      : this.setState((prevState) => ({
+          attributes: [...prevState.attributes, props],
+        }));
+  }
+
+  componentDidMount() {
+    if(this.props.product.inStock){
+      this.props.product.attributes.map(attribute => {
+      return this.updateAttributes({
+          name: attribute.id,
+          value: attribute.items[0].value
+        })
+      })
+    }
+  }
 
   render() {
     const {product, cartHidden, selectedCurrency, addProduct, currencyIndex} = this.props;
-    const { attributes }  = this.state
+    const { attributes }  = this.state;
 
-    console.log(attributes);
-
-    if(product.inStock){
-      product.attributes.map(attribute => attribute.items[0].value)
-      
-    }
+    const arrayId = attributes.map((attr) => attr.name + attr.value);
+    const sortedArray = arrayId.sort().toString();
+    const newProductId = product.id + sortedArray;
         
     return (
       <ProductContainer 
@@ -136,7 +163,7 @@ class CategoryItem extends Component {
                 if (product.attributes.length ===0) {
                   return addProduct(product)
                 } else {
-                  return addProduct(product)
+                  return addProduct(product, attributes, newProductId)
                 }
               }
             }
